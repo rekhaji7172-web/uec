@@ -135,6 +135,15 @@ export function slugify(name: string): string {
    exact name string used in a season's finalist list — names are never
    merged across seasons unless they match exactly, so we never guess at
    collab/alias identities that weren't given to us. */
+function canonicalEditorName(name: string): string {
+  const key = name.toLowerCase().replace(/[^a-z0-9]/g, "")
+  if (key.startsWith("channeling")) return "Channeling"
+  if (key.startsWith("jettstream")) return "Jettstream"
+  if (key.startsWith("wyatt")) return "WyattMC"
+  if (key.startsWith("creo")) return "Creo"
+  return name
+}
+
 function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
   const index = new Map<string, Editor>()
 
@@ -142,17 +151,18 @@ function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
     .filter((s) => s.status === "complete")
     .forEach((season) => {
       season.finalists.forEach((f) => {
-        if (!index.has(f.name)) {
-          index.set(f.name, {
-            name: f.name,
-            slug: slugify(f.name),
+        const canonicalName = canonicalEditorName(f.name)
+        if (!index.has(canonicalName)) {
+          index.set(canonicalName, {
+            name: canonicalName,
+            slug: slugify(canonicalName),
             history: [],
             wins: 0,
             bestRank: f.rank,
             awards: [],
           })
         }
-        const editor = index.get(f.name)!
+        const editor = index.get(canonicalName)!
         editor.history.push({
           seasonId: season.id,
           seasonLabel: season.label,
@@ -225,6 +235,7 @@ export function avatarGradient(name: string): { from: string; to: string; ring: 
    name so alias/collab variants across seasons ("Channeling",
    "Channeling X 1to7", "Channeling / 1to7ae") all resolve to one image. */
 const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
+  { match: "flyxorr", src: "/editors/flyxorr.webp" },
   { match: "channeling", src: "/editors/channeling.webp" },
   { match: "jettstream", src: "/editors/jettstream.png" },
   { match: "vantrex", src: "/editors/vantrex.webp" },
