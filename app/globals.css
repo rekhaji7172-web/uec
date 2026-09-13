@@ -1927,7 +1927,8 @@ main > section::after {
 .reel-live i { width: 7px; height: 7px; border-radius: 50%; background: #48ed9a; box-shadow: 0 0 10px #48ed9a; animation: uec-soft-pulse 2s infinite; }
 .video-lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: rgba(2,2,4,.84); backdrop-filter: blur(18px); animation: uec-fade-up .25s var(--ease-out); }
 .video-dialog { position: relative; width: min(920px, 100%); overflow: hidden; border: 1px solid var(--accent-dim); border-radius: var(--radius-lg); background: var(--bg-raised); box-shadow: 0 30px 100px rgba(0,0,0,.7); }
-.video-frame { aspect-ratio: 16 / 9; background: #000; }
+.video-frame { position: relative; aspect-ratio: 16 / 9; width: 100%; background: #000; }
+.video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 .video-poster { position: relative; display: grid; place-items: center; overflow: hidden; }
 .video-poster img { width: 100%; height: 100%; object-fit: cover; opacity: .72; }
 .video-poster-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,2,8,.12), rgba(4,2,8,.78)); }

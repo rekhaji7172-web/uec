@@ -1,7 +1,7 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { Play, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { Play, X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { SEASONS, type Finalist } from "@/lib/uec-data"
 import { Avatar } from "./avatar"
 import { Reveal } from "./reveal"
@@ -12,8 +12,25 @@ function youtubeId(url: string) {
   return url.match(/(?:shorts\/|youtu\.be\/|watch\?v=)([^?&/]+)/)?.[1] ?? null
 }
 
+function youtubeEmbed(url: string) {
+  const id = youtubeId(url)
+  return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1&controls=1` : null
+}
+
 export function EditorReel() {
   const [index, setIndex] = useState(0)
+  const [active, setActive] = useState<ReelItem | null>(null)
+
+  useEffect(() => {
+    if (!active) return
+    const onKeyDown = (event: KeyboardEvent) => event.key === "Escape" && setActive(null)
+    document.addEventListener("keydown", onKeyDown)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [active])
   const items = useMemo(() => {
     const season = SEASONS.find((entry) => entry.id === "s3")
     return (season?.finalists ?? []).filter((entry) => entry.edit).map((entry) => ({
@@ -33,7 +50,7 @@ export function EditorReel() {
             const id = item.edit ? youtubeId(item.edit) : null
             return (
               <Reveal key={`${item.editorName}-${item.season}`} delay={itemIndex * 55} className="reel-card-wrap">
-                <button className={`reel-card${index === itemIndex ? " is-featured" : ""}`} onClick={() => { setIndex(itemIndex); window.open(item.edit, "_blank", "noopener,noreferrer") }} aria-label={`Open ${item.editorName}'s ${item.season} edit on YouTube`}>
+                <button className={`reel-card${index === itemIndex ? " is-featured" : ""}`} onClick={() => { setIndex(itemIndex); setActive(item) }} aria-label={`Play ${item.editorName}'s ${item.season} edit`}>
                   <div className="reel-card-art">
                     {id ? <img className="reel-thumb" src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /> : <Avatar name={item.editorName} size="lg" />}
                     <span className="reel-vignette" aria-hidden="true" />
@@ -53,6 +70,21 @@ export function EditorReel() {
         <button className="reel-arrow reel-arrow-right" onClick={() => setIndex((index + 1) % items.length)} aria-label="Next edit"><ChevronRight /></button>
       </div>
 
+      {active && youtubeEmbed(active.edit) && (
+        <div className="video-lightbox" role="dialog" aria-modal="true" aria-label={`${active.editorName} edit player`} onMouseDown={(event) => { if (event.currentTarget === event.target) setActive(null) }}>
+          <div className="video-dialog">
+            <button className="video-close" onClick={() => setActive(null)} aria-label="Close video player"><X /></button>
+            <div className="video-frame">
+              <iframe src={youtubeEmbed(active.edit) ?? undefined} title={`${active.editorName} ${active.season} edit`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+            </div>
+            <div className="video-caption">
+              <Avatar name={active.editorName} size="sm" />
+              <div><strong>{active.editorName}</strong><span>{active.season} · {active.subject}</span></div>
+              <a href={active.edit} target="_blank" rel="noreferrer">Open YouTube <ExternalLink /></a>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
