@@ -8,8 +8,13 @@
    ========================================================================== */
 
 @theme inline {
-  --font-display: var(--font-display), "Arial Narrow", sans-serif;
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Trebuchet MS", "Arial Narrow", sans-serif;
+  --font-sans: "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --font-display: "Trebuchet MS", "Arial Narrow", sans-serif;
+  --font-body: "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -2152,3 +2157,53 @@ body::after { background: radial-gradient(ellipse at 20% 10%, rgba(255, 0, 174, 
 @keyframes editor-name-flow { from { background-position: 0% center; } to { background-position: 100% center; } }
 @keyframes podium-name-flow { from { background-position: 0% center; filter: drop-shadow(0 0 2px rgba(255,255,255,.05)); } to { background-position: 100% center; filter: drop-shadow(0 0 12px rgba(255,180,110,.24)); } }
 @media (prefers-reduced-motion: reduce) { .editor-card-name, .rank-name, .reel-card-meta strong, .history-season, .champ-name, .rank-one-name, .rank-2-name, .rank-3-name, .winner-name, .podium-name { animation: none; } }
+
+/* Full editor names: never truncate identity text */
+.editor-card { align-items: center; }
+.editor-card-body { min-width: 0; flex: 1; }
+.editor-card-name {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.08;
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(.94rem, 2vw, 1.08rem);
+  font-weight: 750;
+  background: linear-gradient(100deg, #f7edff 0%, #d6b9ff 44%, #ff9bd8 78%, #fff 100%);
+  background-size: 180% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: editor-name-flow 6s ease-in-out infinite alternate;
+}
+.editor-card:nth-child(3n) .editor-card-name,
+.editor-card:nth-child(3n + 1) .editor-card-name,
+.editor-card.is-champ .editor-card-name { background-image: linear-gradient(100deg, #f7edff 0%, #d6b9ff 44%, #ff9bd8 78%, #fff 100%); }
+@media (max-width: 560px) {
+  .editor-card-name { font-size: .96rem; }
+  .editor-card-meta { white-space: normal; line-height: 1.2; }
+}
+
+/* Explicit podium overrides keep long names visible and richly styled */
+.podium-name {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.05;
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
+  font-weight: 900;
+  background-image: linear-gradient(100deg, #fff 0%, #d7c5ff 35%, #ff74c9 68%, #ffd5f1 100%);
+  background-size: 220% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: editor-name-flow 5s ease-in-out infinite alternate;
+}
+.rank-2-name { background-image: linear-gradient(100deg, #f9f5ff 0%, #b8c8ff 32%, #d49cff 63%, #fff 100%); }
+.rank-3-name { background-image: linear-gradient(100deg, #fff3e8 0%, #ffb36f 32%, #f3749d 63%, #fff 100%); }

@@ -1,22 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import { Big_Shoulders, IBM_Plex_Sans } from "next/font/google"
 import "./globals.css"
-
-const bigShoulders = Big_Shoulders({
-  subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
-  variable: "--font-display",
-  display: "swap",
-})
-
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-  display: "swap",
-})
-
 
 export const metadata: Metadata = {
   title: "UEC — Unstable SMP Editing Competition",
@@ -41,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${bigShoulders.variable} ${plexSans.variable}`}>
+    <html lang="en">
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
