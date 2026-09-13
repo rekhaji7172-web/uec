@@ -55,7 +55,7 @@ export function Leaderboard({ season, onOpenEditor }: LeaderboardProps) {
           </span>
           <div className="winner-name-row">
             <Avatar name={winner.name} size={52} />
-            <h3 className="winner-name">{winner.name}</h3>
+            <h3 className="winner-name rank-one-name">{winner.name}</h3>
           </div>
           {season.award && (
             <span className="winner-award">
@@ -108,7 +108,7 @@ export function Leaderboard({ season, onOpenEditor }: LeaderboardProps) {
             <Avatar name={f.name} size={44} />
             <div className="podium-body">
               <div className="podium-rank">#{f.rank}</div>
-              <div className="podium-name">{f.name}</div>
+              <div className={`podium-name rank-${f.rank}-name`}>{f.name}</div>
             </div>
             {f.edit ? (
               <a

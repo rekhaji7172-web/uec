@@ -2111,15 +2111,44 @@ body {
   background-image: radial-gradient(ellipse at 12% 0%, rgba(255, 71, 176, .34), transparent 34%), radial-gradient(ellipse at 86% 18%, rgba(190, 76, 255, .22), transparent 31%), linear-gradient(145deg, #120711 0%, #210b1d 48%, #09060c 100%);
 }
 body::after { background: radial-gradient(ellipse at 20% 10%, rgba(255, 0, 174, .3), transparent 32%), radial-gradient(ellipse at 78% 45%, rgba(255, 123, 205, .2), transparent 32%); }
-.hero-title, .section-heading, .modal-name, .winner-name { font-family: var(--font-hand), cursive; font-weight: 700; letter-spacing: .01em; line-height: .92; background: linear-gradient(110deg, #fff 8%, #ffcaef 35%, #ff55c7 64%, #d9a5ff 90%); background-size: 180% auto; background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: 0 0 25px rgba(255, 64, 190, .2); animation: handwritten-glow 7s ease-in-out infinite alternate; }
-.hero-title { font-size: clamp(3.8rem, 9vw, 8.4rem); opacity: 1; }
+.hero-title, .section-heading, .modal-name, .winner-name { font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; font-weight: 700; letter-spacing: .01em; line-height: .92; background: linear-gradient(110deg, #fff 8%, #ffcaef 35%, #ff55c7 64%, #d9a5ff 90%); background-size: 180% auto; background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: 0 0 25px rgba(255, 64, 190, .2); animation: handwritten-glow 7s ease-in-out infinite alternate; }
+.hero-title { font-size: clamp(3.4rem, 7vw, 6.7rem); opacity: 1; }
 .section-heading { font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
-.hero-title .line-dim { font-family: var(--font-hand), cursive; background: linear-gradient(110deg, #ff9cd9, #d09bff, #fff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.hero-title .line-dim { font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; background: linear-gradient(110deg, #ff9cd9, #d09bff, #fff); background-clip: text; -webkit-background-clip: text; color: transparent; }
 @keyframes handwritten-glow { from { background-position: 0% center; filter: drop-shadow(0 0 0 rgba(255,0,185,0)); } to { background-position: 100% center; filter: drop-shadow(0 0 12px rgba(255,0,185,.22)); } }
-.editor-card-name, .editor-card-meta, .modal-block-title, .modal-stats span { font-family: var(--font-hand), cursive; }
+.editor-card-name, .editor-card-meta, .modal-block-title, .modal-stats span { font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; }
 .editor-card-name { font-size: 1.35rem; font-weight: 700; }
 .editor-card-meta { font-size: 1rem; }
 .modal-stats span { font-size: .9rem; letter-spacing: .03em; }
 .btn-primary { background: linear-gradient(115deg, #c5a5ff, #f02acb 52%, #ff8fc8); color: #190616; border: 1px solid rgba(255,255,255,.48); }
 .btn-ghost { border-color: rgba(255, 141, 218, .42); background: linear-gradient(115deg, rgba(197,165,255,.2), rgba(240,42,203,.18)); }
 @media (prefers-reduced-motion: reduce) { .hero-title, .section-heading { animation: none; } }
+
+/* Editor name hierarchy: one shared style, with a distinct podium treatment */
+.editor-card-name, .rank-name, .reel-card-meta strong, .history-season, .champ-name {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(100deg, #f7edff 0%, #d6b9ff 44%, #ff9bd8 78%, #fff 100%);
+  background-size: 180% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: editor-name-flow 6s ease-in-out infinite alternate;
+}
+.rank-one-name, .rank-2-name, .rank-3-name, .winner-name, .podium-name {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: podium-name-flow 4.5s ease-in-out infinite alternate;
+}
+.rank-one-name, .winner-name { background-image: linear-gradient(105deg, #fff5b8 0%, #ffd35a 28%, #ff9752 60%, #fff2b6 100%); }
+.rank-2-name { background-image: linear-gradient(105deg, #fff 0%, #dce9ff 32%, #aebbd2 64%, #fff 100%); }
+.rank-3-name { background-image: linear-gradient(105deg, #fff0dc 0%, #e9ae7d 32%, #c67451 64%, #fff0c9 100%); }
+@keyframes editor-name-flow { from { background-position: 0% center; } to { background-position: 100% center; } }
+@keyframes podium-name-flow { from { background-position: 0% center; filter: drop-shadow(0 0 2px rgba(255,255,255,.05)); } to { background-position: 100% center; filter: drop-shadow(0 0 12px rgba(255,180,110,.24)); } }
+@media (prefers-reduced-motion: reduce) { .editor-card-name, .rank-name, .reel-card-meta strong, .history-season, .champ-name, .rank-one-name, .rank-2-name, .rank-3-name, .winner-name, .podium-name { animation: none; } }
