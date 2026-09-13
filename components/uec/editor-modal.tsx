@@ -44,14 +44,17 @@ export function EditorModal({ editor, open, onClose }: EditorModalProps) {
       aria-label={editor ? `${editor.name} profile` : "Editor profile"}
     >
       {editor && (
-        <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className={`modal${editor.wins > 0 ? " modal--champion" : ""}`} onClick={(e) => e.stopPropagation()}>
           <div className="modal-topline" />
-          <button type="button" className="modal-close" onClick={onClose} aria-label="Close profile">
+          <button type="button" className="modal-close" onClick={(event) => { event.stopPropagation(); onClose() }} aria-label="Close profile">
             <CloseIcon size={18} />
           </button>
 
           <div className="modal-header">
-            <Avatar name={editor.name} size={72} />
+            <div className="modal-avatar-wrap">
+              <Avatar name={editor.name} size={72} />
+              <span className="modal-avatar-orbit" aria-hidden="true" />
+            </div>
             <div className="modal-header-body">
               <div className="modal-eyebrow">Editor Profile</div>
               <h2 className="modal-name">{editor.name}</h2>
@@ -72,6 +75,12 @@ export function EditorModal({ editor, open, onClose }: EditorModalProps) {
                 </span>
               </div>
             </div>
+          </div>
+
+          <div className="modal-stats" aria-label="Editor profile stats">
+            <div><strong>{editor.history.length}</strong><span>Seasons</span></div>
+            <div><strong>#{editor.bestRank}</strong><span>Best finish</span></div>
+            <div><strong>{editor.wins}</strong><span>Wins</span></div>
           </div>
 
           <div className="modal-body">

@@ -2073,3 +2073,34 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .editor-card:hover, .editor-card:active { transform: none; }
 }
+
+/* Individual editor identity */
+.editor-card-name, .modal-name, .winner-name {
+  background: linear-gradient(105deg, #fff 8%, #d9c3ff 38%, #ff8aca 72%, #fff 96%);
+  background-size: 220% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: identity-shimmer 5s linear infinite;
+}
+.editor-card:nth-child(3n) .editor-card-name { background-image: linear-gradient(105deg, #fff 8%, #a9eaff 42%, #cba7ff 76%, #fff 96%); }
+.editor-card:nth-child(3n + 1) .editor-card-name { background-image: linear-gradient(105deg, #fff 8%, #ffd1f1 42%, #ff9cbd 76%, #fff 96%); }
+@keyframes identity-shimmer { to { background-position: -220% center; } }
+
+.modal { background: radial-gradient(500px 230px at 8% 0%, rgba(184,160,255,.15), transparent 65%), linear-gradient(180deg, rgba(31,20,43,.98), rgba(14,10,20,.99)); }
+.modal-header { padding-top: 34px; }
+.modal-avatar-wrap { position: relative; flex: 0 0 auto; display: grid; place-items: center; }
+.modal-avatar-wrap .avatar { position: relative; z-index: 1; box-shadow: 0 0 0 6px rgba(255,255,255,.06), 0 0 35px rgba(229,0,229,.38); }
+.modal-avatar-orbit { position: absolute; width: 96px; height: 96px; border: 1px solid rgba(255,133,222,.55); border-left-color: transparent; border-radius: 50%; animation: avatar-orbit 7s linear infinite; }
+@keyframes avatar-orbit { to { transform: rotate(360deg); } }
+.modal-name { font-size: clamp(2rem, 6vw, 2.65rem); }
+.modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 28px; border: 1px solid rgba(214,181,255,.17); border-radius: 16px; overflow: hidden; background: rgba(214,181,255,.12); }
+.modal-stats div { display: grid; gap: 3px; padding: 13px 10px; background: rgba(17,11,24,.72); text-align: center; }
+.modal-stats strong { font-family: var(--font-display); font-size: 1.2rem; color: #f5dbff; }
+.modal-stats span { color: var(--text-faint); font-size: .64rem; text-transform: uppercase; letter-spacing: .08em; }
+.modal-close { z-index: 3; cursor: pointer; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(229,0,229,.13)); }
+.modal-close:focus-visible { outline: 2px solid #ff91d0; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-card-name, .modal-name, .winner-name, .modal-avatar-orbit { animation: none; }
+}
