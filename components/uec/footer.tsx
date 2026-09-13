@@ -12,12 +12,8 @@ export function Footer() {
             height={46}
             style={{ height: 26, width: "auto" }}
           />
-          <span className="footer-brand-text">Unstable SMP Editing Competition</span>
+          <span className="footer-brand-text">Unstable SMP Editing Community</span>
         </div>
-        <p className="footer-note">
-          A community-run editing competition archive. Rankings and awards reflect completed
-          seasons. Not affiliated with any creator or platform.
-        </p>
       </div>
     </footer>
   )

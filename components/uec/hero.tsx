@@ -22,16 +22,9 @@ export function Hero({ onOpenEditor, onJump }: HeroProps) {
     <section className="hero" id="home">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <span className="hero-kicker">
-            <span className="dot" />
-            <span>
-              <strong>{LATEST_SEASON.label}</strong> champion crowned
-            </span>
-          </span>
-
           <h1 className="hero-title">
             <span className="line-dim">Unstable SMP</span>
-            <span className="accent-underline">Editing</span> Competition
+            <span className="accent-underline">Editing</span> Community
           </h1>
 
           <p className="hero-meta">

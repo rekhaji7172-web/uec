@@ -64,7 +64,7 @@ export function Nav() {
           />
           <span className="brand-text">
             <span className="brand-name">UEC</span>
-            <span className="brand-sub">Editing Competition</span>
+            <span className="brand-sub">Unstable SMP Editing Community</span>
           </span>
         </a>
 

@@ -1773,16 +1773,7 @@ main > section {
 }
 
 main > section::after {
-  content: "";
-  position: absolute;
-  top: 76px;
-  right: max(24px, calc((100vw - var(--container)) / 2));
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 16px var(--accent-glow);
-  opacity: 0.65;
+  display: none;
 }
 
 .hero {
@@ -1795,15 +1786,7 @@ main > section::after {
 }
 
 .hero::before {
-  content: "ARCHIVE / 03";
-  position: absolute;
-  top: 34px;
-  right: max(24px, calc((100vw - var(--container)) / 2));
-  color: var(--text-faint);
-  font-family: var(--font-display);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  opacity: 0.8;
+  display: none;
 }
 
 .hero-grid {
