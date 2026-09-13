@@ -1925,3 +1925,63 @@ main > section::after {
 .video-caption a { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: var(--accent); font-size: .76rem; font-weight: 700; }
 @media (max-width: 520px) { .reel-shell { margin: 0 -16px; padding-inline: 54px; } .reel-track { gap: 12px; } .reel-card { width: 236px; } .reel-card-art { min-height: 190px; } .reel-arrow { width: 36px; height: 36px; } .reel-arrow-left { left: 10px; } .reel-arrow-right { right: 10px; } .video-caption a { display: none; } }
 @media (prefers-reduced-motion: reduce) { .reel-card, .reel-card-art .avatar, .reel-play { transition: none; } }
+
+/* Ambient pink gradient atmosphere */
+body {
+  background-color: #08050c;
+  background-image:
+    linear-gradient(180deg, rgba(8, 5, 12, 0.92) 0%, rgba(8, 5, 12, 0.78) 42%, rgba(8, 5, 12, 0.96) 100%),
+    url("/fvgf.png");
+  background-attachment: fixed;
+  background-position: center top;
+  background-size: cover;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 18% 10%, rgba(255, 0, 180, 0.24), transparent 32%),
+    radial-gradient(ellipse at 84% 28%, rgba(255, 70, 175, 0.16), transparent 30%);
+  filter: blur(22px);
+  animation: ambient-drift 16s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift {
+  from { transform: translate3d(-1%, -1%, 0) scale(1); opacity: 0.7; }
+  to { transform: translate3d(1.5%, 1%, 0) scale(1.04); opacity: 1; }
+}
+
+/* Micro-interactions */
+.nav-link, .nav-cta, .btn-primary, .reel-arrow, .icon-btn {
+  transition: color .22s ease, background-color .22s ease, border-color .22s ease, transform .22s var(--ease-out), box-shadow .22s ease;
+}
+.nav-link:hover { transform: translateY(-2px); }
+.nav-cta:hover, .btn-primary:hover { transform: translateY(-3px); }
+.nav-cta:active, .btn-primary:active, .reel-arrow:active, .icon-btn:active { transform: translateY(0) scale(.96); }
+
+.section-heading h2 { animation: heading-breathe 6s ease-in-out infinite; }
+@keyframes heading-breathe {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 28px rgba(255, 0, 210, 0.12); }
+}
+
+.reel-card-art::after {
+  content: "";
+  position: absolute;
+  inset: -30% -60%;
+  z-index: 2;
+  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,.14) 50%, transparent 58%);
+  transform: translateX(-55%) rotate(8deg);
+  transition: transform .8s var(--ease-out);
+  pointer-events: none;
+}
+.reel-card:hover .reel-card-art::after { transform: translateX(55%) rotate(8deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  body::after, .section-heading h2 { animation: none; }
+  .nav-link:hover, .nav-cta:hover, .btn-primary:hover { transform: none; }
+}
