@@ -2040,3 +2040,36 @@ body::after {
   .btn:hover::before { animation: none; }
   .champ-card:hover, .hero-stat:hover { transform: none; }
 }
+
+/* Editor profile cards */
+.editors-grid { gap: 20px; }
+.editor-card {
+  background: linear-gradient(135deg, rgba(255,255,255,.065), rgba(255,255,255,.018) 52%), var(--bg-raised);
+  border-color: rgba(214, 181, 255, .16);
+  backdrop-filter: blur(14px);
+}
+.editor-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px 130px at 0% 0%, rgba(190,150,255,.16), transparent 72%);
+  opacity: .75;
+  pointer-events: none;
+}
+.editor-card > * { position: relative; z-index: 1; }
+.editor-card:hover { transform: translateY(-7px) scale(1.012); border-color: rgba(255, 110, 220, .7); }
+.editor-card:active { transform: translateY(-2px) scale(.985); }
+.editor-card .avatar { box-shadow: 0 0 0 5px rgba(255,255,255,.035), 0 0 28px rgba(229,0,229,.2); transition: transform .35s var(--ease-out), box-shadow .35s ease; }
+.editor-card:hover .avatar { transform: rotate(-5deg) scale(1.08); box-shadow: 0 0 0 5px rgba(255,255,255,.065), 0 0 34px rgba(229,0,229,.42); }
+.editor-card-name { font-size: 1.06rem; font-weight: 750; letter-spacing: -.015em; background: linear-gradient(100deg, #fff, #e7cfff 58%, #ff9ed7); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.editor-card-meta { color: #b9a9cb; }
+.editor-card-badge { padding: 4px 8px; border: 1px solid rgba(255, 110, 220, .26); border-radius: 999px; background: rgba(229,0,229,.08); }
+
+/* More intentional typography */
+.hero-title, .section-heading { text-wrap: balance; }
+.hero-title strong { background: linear-gradient(100deg, #ffffff 10%, #e7c8ff 48%, #ff8fce 90%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.section-kicker, .eyebrow { color: #e6b4ff; letter-spacing: .16em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-card:hover, .editor-card:active { transform: none; }
+}
