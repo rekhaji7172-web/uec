@@ -146,6 +146,23 @@ export function ChevronRightIcon({ size = 18, className, strokeWidth = 1.8 }: Ic
   )
 }
 
+export function ChevronLeftIcon({ size = 18, className, strokeWidth = 1.8 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="m15 5-7 7 7 7" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+export function ExternalLinkIcon({ size = 16, className, strokeWidth = 1.7 }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M14 4h6v6M20 4l-9 9" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export function MenuIcon({ size = 20, className, strokeWidth = 1.7 }: IconProps) {
   return (
     <svg {...base(size)} className={className}>

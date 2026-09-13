@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { Play, X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
-import { SEASONS, type Finalist } from "@/lib/uec-data"
 import { Avatar } from "./avatar"
+import { ChevronLeftIcon, ChevronRightIcon, CloseIcon, ExternalLinkIcon, PlayIcon } from "./icons"
+import { SEASONS, type Finalist } from "@/lib/uec-data"
 import { Reveal } from "./reveal"
 
 type ReelItem = Finalist & { season: string; subject: string; editorName: string }
@@ -44,7 +44,7 @@ export function EditorReel() {
   return (
     <>
       <div className="reel-shell">
-        <button className="reel-arrow reel-arrow-left" onClick={() => setIndex((index - 1 + items.length) % items.length)} aria-label="Previous edit"><ChevronLeft /></button>
+        <button className="reel-arrow reel-arrow-left" onClick={() => setIndex((index - 1 + items.length) % items.length)} aria-label="Previous edit"><ChevronLeftIcon /></button>
         <div className="reel-track" style={{ transform: `translateX(-${index * 284}px)` }}>
           {items.map((item, itemIndex) => {
             const id = item.edit ? youtubeId(item.edit) : null
@@ -55,25 +55,25 @@ export function EditorReel() {
                     {id ? <img className="reel-thumb" src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /> : <Avatar name={item.editorName} size="lg" />}
                     <span className="reel-vignette" aria-hidden="true" />
                     <span className="reel-noise" aria-hidden="true" />
-                    <span className="reel-play"><Play size={17} fill="currentColor" /></span>
+                    <span className="reel-play"><PlayIcon size={17} /></span>
                     <span className="reel-rank">#{String(item.rank).padStart(2, "0")}</span>
                   </div>
                   <div className="reel-card-meta">
                     <div><strong>{item.editorName}</strong><span>{item.season} · {item.subject}</span></div>
-                    <ExternalLink size={14} aria-hidden="true" />
+                    <ExternalLinkIcon size={14} />
                   </div>
                 </button>
               </Reveal>
             )
           })}
         </div>
-        <button className="reel-arrow reel-arrow-right" onClick={() => setIndex((index + 1) % items.length)} aria-label="Next edit"><ChevronRight /></button>
+        <button className="reel-arrow reel-arrow-right" onClick={() => setIndex((index + 1) % items.length)} aria-label="Next edit"><ChevronRightIcon /></button>
       </div>
 
       {active && youtubeEmbed(active.edit) && (
         <div className="video-lightbox" role="dialog" aria-modal="true" aria-label={`${active.editorName} edit player`} onMouseDown={(event) => { if (event.currentTarget === event.target) setActive(null) }}>
           <div className="video-dialog">
-            <button className="video-close" onClick={() => setActive(null)} aria-label="Close video player"><X /></button>
+            <button className="video-close" onClick={() => setActive(null)} aria-label="Close video player"><CloseIcon /></button>
             <div className="video-frame">
               <iframe src={youtubeEmbed(active.edit) ?? undefined} title={`${active.editorName} ${active.season} edit`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
             </div>
