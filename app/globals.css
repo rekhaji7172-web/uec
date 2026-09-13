@@ -1753,3 +1753,145 @@ button {
     padding: 8px 20px 26px;
   }
 }
+
+/* ========================================================================== 
+   Editorial upgrade — cinematic archive details
+   ========================================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+main > section {
+  position: relative;
+}
+
+main > section::after {
+  content: "";
+  position: absolute;
+  top: 76px;
+  right: max(24px, calc((100vw - var(--container)) / 2));
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+  opacity: 0.65;
+}
+
+.hero {
+  min-height: min(760px, calc(100vh - 72px));
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, transparent 0 8%, rgba(229, 0, 229, 0.035) 8% 8.1%, transparent 8.1% 100%),
+    radial-gradient(600px 500px at 68% 48%, rgba(229, 0, 229, 0.055), transparent 72%);
+}
+
+.hero::before {
+  content: "ARCHIVE / 03";
+  position: absolute;
+  top: 34px;
+  right: max(24px, calc((100vw - var(--container)) / 2));
+  color: var(--text-faint);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  opacity: 0.8;
+}
+
+.hero-grid {
+  width: 100%;
+}
+
+.hero-title {
+  max-width: 8.5ch;
+  text-shadow: 0 12px 50px rgba(0, 0, 0, 0.45);
+}
+
+.hero-meta {
+  border-left: 1px solid var(--accent-dim);
+  padding-left: 18px;
+}
+
+.champ-card {
+  isolation: isolate;
+  box-shadow: 24px 24px 0 rgba(229, 0, 229, 0.035), 0 28px 70px -32px rgba(0, 0, 0, 0.9);
+}
+
+.champ-card::after,
+.winner-card::after,
+.editor-card::after,
+.award-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(transparent 0 49%, rgba(255, 255, 255, 0.018) 50%, transparent 51%);
+  background-size: 100% 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.champ-card:hover::after,
+.winner-card:hover::after,
+.editor-card:hover::after,
+.award-card:hover::after {
+  opacity: 1;
+}
+
+.winner-card {
+  box-shadow: 16px 16px 0 rgba(229, 0, 229, 0.025), 0 24px 52px -30px rgba(0, 0, 0, 0.9);
+}
+
+.winner-rankmark::after {
+  content: "CHAMPION";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  color: var(--accent-dim);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.editor-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 36px -30px rgba(0, 0, 0, 0.95);
+}
+
+.editor-card:hover {
+  box-shadow: 0 22px 46px -24px var(--accent-glow);
+}
+
+.btn-primary {
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 8px 18px -12px var(--accent-glow);
+}
+
+@media (max-width: 940px) {
+  .hero {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  main > section::after,
+  .hero::before {
+    display: none;
+  }
+  .hero {
+    padding-top: 54px;
+  }
+  .hero-meta {
+    padding-left: 14px;
+  }
+}
