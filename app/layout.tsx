@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import { Big_Shoulders, IBM_Plex_Sans } from "next/font/google"
+import { Big_Shoulders, Caveat, IBM_Plex_Sans } from "next/font/google"
 import "./globals.css"
 
 const bigShoulders = Big_Shoulders({
@@ -14,6 +14,13 @@ const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body",
+  display: "swap",
+})
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-hand",
   display: "swap",
 })
 
@@ -40,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${bigShoulders.variable} ${plexSans.variable}`}>
+    <html lang="en" className={`${bigShoulders.variable} ${plexSans.variable} ${caveat.variable}`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
