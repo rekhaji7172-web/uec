@@ -235,6 +235,9 @@ export function avatarGradient(name: string): { from: string; to: string; ring: 
    name so alias/collab variants across seasons ("Channeling",
    "Channeling X 1to7", "Channeling / 1to7ae") all resolve to one image. */
 const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
+  { match: "pubkin", src: "/editors/pubkin.webp" },
+  { match: "pumpkin", src: "/editors/pubkin.webp" },
+  { match: "slipped", src: "/editors/slipped.webp" },
   { match: "flayxor", src: "/editors/flyxorr.webp" },
   { match: "flyxorr", src: "/editors/flyxorr.webp" },
   { match: "channeling", src: "/editors/channeling.webp" },
