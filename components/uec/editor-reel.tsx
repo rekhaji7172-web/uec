@@ -14,7 +14,7 @@ function youtubeId(url: string) {
 
 function youtubeEmbed(url: string) {
   const id = youtubeId(url)
-  return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1&controls=1` : null
+  return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1&controls=1&loop=1&playlist=${id}` : null
 }
 
 export function EditorReel() {
