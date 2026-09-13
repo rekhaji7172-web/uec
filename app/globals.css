@@ -672,6 +672,18 @@ button {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 8px 22px -10px rgba(0, 0, 0, 0.6);
 }
 
+/* Real photo avatars: soften the built-in gloss so it reads as a subtle
+   sheen instead of washing out the artwork. */
+.avatar-img::after {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.12), transparent 52%);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+.avatar-img img {
+  display: block;
+}
+
 /* ==========================================================================
    Buttons
    ========================================================================== */

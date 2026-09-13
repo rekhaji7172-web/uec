@@ -221,6 +221,28 @@ export function avatarGradient(name: string): { from: string; to: string; ring: 
   return { from, to, ring }
 }
 
+/* Real editor profile pictures. Keyed by a keyword found in the finalist
+   name so alias/collab variants across seasons ("Channeling",
+   "Channeling X 1to7", "Channeling / 1to7ae") all resolve to one image. */
+const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
+  { match: "channeling", src: "/editors/channeling.webp" },
+  { match: "jettstream", src: "/editors/jettstream.png" },
+  { match: "vantrex", src: "/editors/vantrex.webp" },
+  { match: "wyatt", src: "/editors/wyattmc.webp" },
+  { match: "synccraft", src: "/editors/synccraft.webp" },
+  { match: "inferno", src: "/editors/inferno.webp" },
+  { match: "creo", src: "/editors/creo.webp" },
+  { match: "paceglint", src: "/editors/paceglint.webp" },
+]
+
+export function editorImage(name: string): string | null {
+  const key = name.toLowerCase()
+  for (const rule of EDITOR_IMAGE_RULES) {
+    if (key.includes(rule.match)) return rule.src
+  }
+  return null
+}
+
 export function initials(name: string): string {
   const cleaned = name.replace(/[^a-zA-Z0-9 /]/g, " ").trim()
   const parts = cleaned.split(/[ /]+/).filter(Boolean)
