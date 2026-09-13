@@ -12,6 +12,7 @@ import { Hero } from "./hero"
 import { SeasonStrip } from "./season-strip"
 import { Leaderboard } from "./leaderboard"
 import { EditorsGrid } from "./editors-grid"
+import { EditorReelSection } from "./editor-reel"
 import { Awards } from "./awards"
 import { Upcoming } from "./upcoming"
 import { Footer } from "./footer"
@@ -116,6 +117,8 @@ export function UecApp() {
             </Reveal>
           </div>
         </section>
+
+        <EditorReelSection />
 
         {/* Awards */}
         <section className="section-pad section-line" id="awards">
