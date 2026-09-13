@@ -24,7 +24,7 @@ export function Hero({ onOpenEditor, onJump }: HeroProps) {
         <div className="hero-copy">
           <h1 className="hero-title">
             <span className="line-dim">Unstable SMP</span>
-            <span className="accent-underline">Editing</span> Community
+            Editing Community
           </h1>
 
           <p className="hero-meta">
