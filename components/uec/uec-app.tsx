@@ -69,8 +69,8 @@ export function UecApp() {
                 <span className="eyebrow">Season Archive</span>
                 <h2 className="section-heading">Every season, one bracket at a time</h2>
                 <p className="section-sub">
-                  Each season pits the community&apos;s best editors against one featured creator.
-                  Pick a season to load its full leaderboard.
+                  One featured creator. A room full of ambitious editors. Choose a season and trace the edits,
+                  rankings and rivalries that made it.
                 </p>
               </div>
             </Reveal>

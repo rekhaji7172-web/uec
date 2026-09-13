@@ -1985,3 +1985,58 @@ body::after {
   body::after, .section-heading h2 { animation: none; }
   .nav-link:hover, .nav-cta:hover, .btn-primary:hover { transform: none; }
 }
+
+/* Signature interaction layer */
+:root {
+  --signature-gradient: linear-gradient(115deg, #b8a0ff 0%, #e500e5 48%, #ff7dbd 100%);
+  --signature-gradient-soft: linear-gradient(115deg, rgba(184,160,255,.18), rgba(229,0,229,.14), rgba(255,125,189,.16));
+}
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  letter-spacing: .01em;
+  overflow: hidden;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.24) 50%, transparent 75%);
+  background-size: 220% 100%;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.btn:hover::before { opacity: 1; animation: button-sheen .8s var(--ease-out); }
+.btn-primary {
+  border-color: rgba(255,255,255,.32);
+  background: var(--signature-gradient);
+  box-shadow: inset 0 1px rgba(255,255,255,.35), 0 10px 28px -15px rgba(229,0,229,.9);
+}
+.btn-primary:hover { box-shadow: inset 0 1px rgba(255,255,255,.5), 0 16px 34px -12px rgba(229,0,229,.9); }
+.btn-ghost { background: var(--signature-gradient-soft); border-color: rgba(229,0,229,.28); backdrop-filter: blur(10px); }
+.btn-ghost:hover { background: var(--signature-gradient); color: #160012; border-color: rgba(255,255,255,.35); }
+@keyframes button-sheen { from { background-position: 160% 0; } to { background-position: -60% 0; } }
+
+.section-head { position: relative; }
+.section-heading { letter-spacing: -.018em; background: linear-gradient(110deg, var(--text) 20%, #e8cfff 58%, #ff91d0 100%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.section-sub, .hero-meta { color: color-mix(in srgb, var(--text-dim) 86%, #d7b8ff); }
+.hero-title { letter-spacing: -.035em; text-shadow: 0 0 50px rgba(229,0,229,.1); }
+.hero-title .line-dim { background: linear-gradient(90deg, #a99cff, #ff8bca); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.hero-stat { transition: transform .3s var(--ease-out); }
+.hero-stat:hover { transform: translateY(-5px); }
+.hero-stat-num { background: var(--signature-gradient); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.champ-card { transition: transform .45s var(--ease-out), border-color .3s ease, box-shadow .45s ease; }
+.champ-card:hover { transform: translateY(-8px) rotate(.35deg); border-color: #ff63dc; box-shadow: 0 28px 70px -32px rgba(229,0,229,.7); }
+.reel-card, .editor-card, .leaderboard-row, .award-card, .season-card { transition: transform .35s var(--ease-out), border-color .3s ease, box-shadow .35s ease, background .3s ease; }
+.reel-card:focus-visible, .editor-card:focus-visible, .leaderboard-row:focus-visible { transform: translateY(-4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover::before { animation: none; }
+  .champ-card:hover, .hero-stat:hover { transform: none; }
+}

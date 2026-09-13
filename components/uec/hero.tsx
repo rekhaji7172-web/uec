@@ -28,9 +28,9 @@ export function Hero({ onOpenEditor, onJump }: HeroProps) {
           </h1>
 
           <p className="hero-meta">
-            The official archive of the <strong>UEC</strong> — where the community&apos;s best
-            editors go head-to-head each season on a featured creator. Browse every leaderboard,
-            award and editor across the competition&apos;s history.
+            The living archive of <strong>UEC</strong> — where the community&apos;s sharpest editors turn
+            creator moments into unforgettable cuts. Explore every season, leaderboard, award and
+            editor who shaped the bracket.
           </p>
 
           <div className="hero-actions">
