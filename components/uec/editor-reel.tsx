@@ -77,11 +77,6 @@ export function EditorReel() {
             <div className="video-frame">
               <iframe src={youtubeEmbed(active.edit) ?? undefined} title={`${active.editorName} ${active.season} edit`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
             </div>
-            <div className="video-caption">
-              <Avatar name={active.editorName} size="sm" />
-              <div><strong>{active.editorName}</strong><span>{active.season} · {active.subject}</span></div>
-              <a href={active.edit} target="_blank" rel="noreferrer">Open YouTube <ExternalLink /></a>
-            </div>
           </div>
         </div>
       )}
