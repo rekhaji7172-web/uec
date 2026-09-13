@@ -2207,3 +2207,31 @@ body::after { background: radial-gradient(ellipse at 20% 10%, rgba(255, 0, 174, 
 }
 .rank-2-name { background-image: linear-gradient(100deg, #f9f5ff 0%, #b8c8ff 32%, #d49cff 63%, #fff 100%); }
 .rank-3-name { background-image: linear-gradient(100deg, #fff3e8 0%, #ffb36f 32%, #f3749d 63%, #fff 100%); }
+
+/* Hero champion feature card */
+.hero-showcase { display: flex; align-items: center; justify-content: center; }
+.champ-card {
+  width: min(100%, 560px);
+  min-height: 390px;
+  padding: 40px;
+  border-radius: 30px;
+  background: radial-gradient(520px 300px at 86% -8%, rgba(255, 91, 207, .28), transparent 67%), linear-gradient(145deg, rgba(47, 18, 53, .98), rgba(16, 9, 22, .98));
+  border-color: rgba(255, 137, 224, .46);
+  box-shadow: 0 34px 85px -32px rgba(229, 0, 229, .65), inset 0 1px rgba(255,255,255,.22);
+  transform: translateY(0) rotate(.2deg);
+  transition: transform .5s var(--ease-out), box-shadow .5s ease, border-color .3s ease;
+}
+.champ-card:hover { transform: translateY(-10px) rotate(-.35deg) scale(1.018); box-shadow: 0 45px 100px -30px rgba(229, 0, 229, .78), inset 0 1px rgba(255,255,255,.3); }
+.champ-card::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.16) 50%, transparent 70%); background-size: 220% 100%; animation: champ-sheen 7s ease-in-out infinite; }
+@keyframes champ-sheen { 0%, 55% { background-position: 150% 0; } 78%, 100% { background-position: -50% 0; } }
+.champ-avatar-wrap { gap: 24px; margin-top: 34px; }
+.champ-avatar-wrap .avatar { width: 96px !important; height: 96px !important; border-radius: 28px !important; box-shadow: 0 0 0 6px rgba(255,255,255,.06), 0 0 40px rgba(255, 79, 210, .45); }
+.champ-name { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+.champ-meta { margin-top: 30px; gap: 12px; }
+.champ-chip { padding: 9px 12px; background: rgba(255,255,255,.07); border-color: rgba(255, 158, 226, .22); }
+.champ-view { margin-top: 28px; min-height: 52px; }
+@media (max-width: 700px) {
+  .champ-card { min-height: 0; padding: 28px; }
+  .champ-avatar-wrap { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .champ-card, .champ-card::after { animation: none; transition: none; } }
