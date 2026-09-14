@@ -19,6 +19,7 @@ import { Upcoming } from "./upcoming"
 import { Footer } from "./footer"
 import { EditorModal } from "./editor-modal"
 import { Reveal } from "./reveal"
+import { AnalyticsTracker } from "@/components/analytics-tracker"
 
 export function UecApp() {
   const [activeSeasonId, setActiveSeasonId] = useState<string>(LATEST_SEASON.id)
@@ -54,6 +55,7 @@ export function UecApp() {
 
   return (
     <>
+      <AnalyticsTracker />
       <div className="bg-glow" aria-hidden="true" />
       <div className="bg-grid" aria-hidden="true" />
 

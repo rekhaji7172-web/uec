@@ -52,7 +52,7 @@ export function EditorReel() {
               <Reveal key={`${item.editorName}-${item.season}`} delay={itemIndex * 55} className="reel-card-wrap">
                 <button className={`reel-card${index === itemIndex ? " is-featured" : ""}`} onClick={() => { setIndex(itemIndex); setActive(item) }} aria-label={`Play ${item.editorName}'s ${item.season} edit`}>
                   <div className="reel-card-art">
-                    {id ? <img className="reel-thumb" src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /> : <Avatar name={item.editorName} size="lg" />}
+                    {id ? <img className="reel-thumb" src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /> : <Avatar name={item.editorName} size={48} />}
                     <span className="reel-vignette" aria-hidden="true" />
                     <span className="reel-noise" aria-hidden="true" />
                     <span className="reel-play"><PlayIcon size={17} /></span>
@@ -70,7 +70,7 @@ export function EditorReel() {
         <button className="reel-arrow reel-arrow-right" onClick={() => setIndex((index + 1) % items.length)} aria-label="Next edit"><ChevronRightIcon /></button>
       </div>
 
-      {active && youtubeEmbed(active.edit) && (
+      {active?.edit && youtubeEmbed(active.edit) && (
         <div className="video-lightbox" role="dialog" aria-modal="true" aria-label={`${active.editorName} edit player`} onMouseDown={(event) => { if (event.currentTarget === event.target) setActive(null) }}>
           <div className="video-dialog">
             <button className="video-close" onClick={() => setActive(null)} aria-label="Close video player"><CloseIcon /></button>
