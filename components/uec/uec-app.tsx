@@ -13,6 +13,7 @@ import { SeasonStrip } from "./season-strip"
 import { Leaderboard } from "./leaderboard"
 import { EditorsGrid } from "./editors-grid"
 import { EditorReelSection } from "./editor-reel"
+import { DiscordCommunity } from "./discord-community"
 import { Awards } from "./awards"
 import { Upcoming } from "./upcoming"
 import { Footer } from "./footer"
@@ -119,6 +120,7 @@ export function UecApp() {
         </section>
 
         <EditorReelSection />
+        <DiscordCommunity />
 
         {/* Awards */}
         <section className="section-pad section-line" id="awards">
