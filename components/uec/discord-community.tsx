@@ -34,7 +34,7 @@ export function DiscordCommunity() {
               <span className="community-url">discord.gg/UHhrNckudE</span>
             </div>
           </div>
-          <div className="community-signal" aria-hidden="true"><span className="community-signal-orbit" /><span className="community-signal-core"><Image src="/uec-logo.png" alt="" width={92} height={52} /></span></div>
+          <div className="community-signal" aria-hidden="true"><span className="community-signal-orbit" /><span className="community-signal-core"><Image src="/uec-logo.png" alt="" width={156} height={80} /></span></div>
         </Reveal>
 
         <div className="community-grid">
