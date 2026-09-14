@@ -2,11 +2,24 @@
 
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { siteContent } from "@/lib/db/schema"
+import { session as authSession, siteContent, user as adminUser } from "@/lib/db/schema"
 import { and, asc, eq } from "drizzle-orm"
 import { headers } from "next/headers"
 import { revalidatePath } from "next/cache"
 import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
+
+export async function listAdmins() {
+  await adminId()
+  return db.select({ id: adminUser.id, name: adminUser.name, blocked: adminUser.blocked }).from(adminUser).orderBy(asc(adminUser.name))
+}
+
+export async function setAdminBlocked(id: string, blocked: boolean) {
+  const currentId = await adminId()
+  if (id === currentId) throw new Error("You cannot block your own account")
+  await db.update(adminUser).set({ blocked, updatedAt: new Date() }).where(eq(adminUser.id, id))
+  if (blocked) await db.delete(authSession).where(eq(authSession.userId, id))
+  revalidatePath("/admin")
+}
 
 export async function addAdmin(input: { name: string; password: string }) {
   await adminId()
@@ -18,6 +31,8 @@ export async function addAdmin(input: { name: string; password: string }) {
 async function adminId() {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user) throw new Error("Unauthorized")
+  const current = await db.select({ blocked: adminUser.blocked }).from(adminUser).where(eq(adminUser.id, session.user.id)).limit(1)
+  if (current[0]?.blocked) throw new Error("Admin access blocked")
   return session.user.id
 }
 
