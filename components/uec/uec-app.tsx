@@ -21,7 +21,9 @@ import { EditorModal } from "./editor-modal"
 import { Reveal } from "./reveal"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
 
-export function UecApp() {
+type PublishedContent = { id: string; kind: string; slug: string; title: string; description: string }
+
+export function UecApp({ publishedContent = [] }: { publishedContent?: PublishedContent[] }) {
   const [activeSeasonId, setActiveSeasonId] = useState<string>(LATEST_SEASON.id)
   const [editor, setEditor] = useState<Editor | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
@@ -62,6 +64,8 @@ export function UecApp() {
       <Nav />
 
       <main>
+        {publishedContent.length > 0 && <section className="published-updates" aria-label="Latest published updates"><div className="wrap"><div className="published-updates-heading"><span className="eyebrow">Live from UEC</span><span className="published-live-dot">Published</span></div><div className="published-updates-grid">{publishedContent.slice(0, 3).map((item) => <article className="published-update" key={item.id} id={item.slug}><span>{item.kind}</span><h2>{item.title}</h2>{item.description && <p>{item.description}</p>}</article>)}</div></div></section>}
+
         <Hero onOpenEditor={openEditor} onJump={jump} />
 
         {/* Seasons */}

@@ -15,7 +15,8 @@ export async function POST(request: Request) {
   if (!name || !password) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 })
 
   const email = adminEmail(name)
-  const existing = await db.select({ id: user.id }).from(user).where(eq(user.email, email)).limit(1)
+  const existing = await db.select({ id: user.id, blocked: user.blocked }).from(user).where(eq(user.email, email)).limit(1)
+  if (existing[0]?.blocked) return NextResponse.json({ error: "Your admin access is blocked. Contact another administrator." }, { status: 403 })
   if (existing.length === 0 && name.toLowerCase() === bootstrapName.toLowerCase() && password === bootstrapPassword) {
     await auth.api.signUpEmail({ body: { name: bootstrapName, email, password } })
   }
