@@ -2258,6 +2258,9 @@ body::after { background: radial-gradient(ellipse at 20% 10%, rgba(255, 0, 174, 
 @media (prefers-reduced-motion: reduce) { .community-hero::after, .community-signal-orbit { animation: none; } .community-feature:hover, .discord-channel-row:hover { transform: none; } }
 
 /* Admin content control */
+.admin-nav-link { display: inline-flex; align-items: center; border: 1px solid rgba(255, 122, 218, .45); border-radius: 999px; padding: 8px 13px; color: #ffd4f3; background: rgba(255, 73, 201, .12); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.admin-nav-link:hover { border-color: #ff9cdd; background: rgba(255, 73, 201, .24); }
+.admin-toolbar-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .admin-shell { min-height: 100vh; padding: 48px clamp(20px, 5vw, 80px); color: #f9efff; background: radial-gradient(circle at 85% 0%, rgba(247, 65, 206, .16), transparent 35%), #100814; }
 .admin-header, .admin-toolbar, .admin-grid { width: min(1180px, 100%); margin: 0 auto; }
 .admin-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.1); }

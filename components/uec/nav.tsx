@@ -78,6 +78,8 @@ export function Nav() {
           ))}
         </nav>
 
+        <a className="admin-nav-link" href="/admin/sign-in">Admin login</a>
+
         <button
           type="button"
           className="nav-toggle"

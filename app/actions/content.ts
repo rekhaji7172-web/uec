@@ -6,6 +6,14 @@ import { siteContent } from "@/lib/db/schema"
 import { and, asc, eq } from "drizzle-orm"
 import { headers } from "next/headers"
 import { revalidatePath } from "next/cache"
+import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
+
+export async function addAdmin(input: { name: string; password: string }) {
+  await adminId()
+  const name = cleanAdminName(input.name)
+  if (name.length < 2 || input.password.length < 8) throw new Error("Admin name and password are invalid")
+  await auth.api.signUpEmail({ body: { name, email: adminEmail(name), password: input.password } })
+}
 
 async function adminId() {
   const session = await auth.api.getSession({ headers: await headers() })
