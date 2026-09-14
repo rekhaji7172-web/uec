@@ -60,12 +60,8 @@ export function Nav() {
             width={120}
             height={62}
             priority
-            style={{ height: 34, width: "auto" }}
+            style={{ height: 42, width: "auto", objectFit: "contain", mixBlendMode: "screen" }}
           />
-          <span className="brand-text">
-            <span className="brand-name">UEC</span>
-            <span className="brand-sub">Unstable SMP Editing Community</span>
-          </span>
         </a>
 
         <nav className={`nav-links${open ? " mobile-open" : ""}`} aria-label="Primary">
@@ -81,6 +77,8 @@ export function Nav() {
             </a>
           ))}
         </nav>
+
+        <a className="admin-nav-link" href="/admin/sign-in">Admin login</a>
 
         <button
           type="button"
