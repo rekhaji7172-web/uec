@@ -1,7 +1,7 @@
-import { boolean, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+import { boolean, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const user = pgTable("user", {
-  id: uuid("id").primaryKey(),
+  id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("emailVerified").notNull().default(false),
@@ -18,7 +18,7 @@ export const session = pgTable("session", {
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
   ipAddress: text("ipAddress"),
   userAgent: text("userAgent"),
-  userId: uuid("userId").notNull(),
+  userId: text("userId").notNull(),
 })
 
 export const siteContent = pgTable("site_content", {
@@ -31,7 +31,7 @@ export const siteContent = pgTable("site_content", {
   published: boolean("published").notNull().default(true),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
-  userId: uuid("userId").notNull(),
+  userId: text("userId").notNull(),
 })
 
 export const pageView = pgTable("page_view", {
