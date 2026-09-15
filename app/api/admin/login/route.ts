@@ -1,8 +1,5 @@
 import { auth } from "@/lib/auth"
 import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
-import { db } from "@/lib/db"
-import { user } from "@/lib/db/schema"
-import { and, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
 const bootstrapName = "Yuvraj"
@@ -15,19 +12,11 @@ export async function POST(request: Request) {
   if (!name || !password) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 })
 
   const email = adminEmail(name)
-  const blockedAccount = await db.select({ id: user.id }).from(user).where(and(eq(user.email, email), eq(user.blocked, true))).limit(1)
-  if (blockedAccount.length > 0) return NextResponse.json({ error: "Your admin access is blocked. Contact another administrator." }, { status: 403 })
-  const existing = await db.select({ id: user.id }).from(user).where(eq(user.email, email)).limit(1)
-  if (existing.length === 0 && name.toLowerCase() === bootstrapName.toLowerCase() && password === bootstrapPassword) {
-    await auth.api.signUpEmail({ body: { name: bootstrapName, email, password } })
-  }
 
-  const requestOrigin = request.headers.get("origin") || new URL(request.url).origin
-  const signInUrl = new URL("/api/auth/sign-in/email", requestOrigin)
+  // Try to sign in with the provided credentials
+  const signInUrl = new URL("/api/auth/sign-in/email", request.headers.get("origin") || new URL(request.url).origin)
   const authHeaders = new Headers(request.headers)
   authHeaders.set("content-type", "application/json")
-  authHeaders.set("origin", requestOrigin)
-  authHeaders.set("host", signInUrl.host)
 
   return auth.handler(
     new Request(signInUrl, {
