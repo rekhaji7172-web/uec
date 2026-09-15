@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth"
 import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
 import { db } from "@/lib/db"
 import { user } from "@/lib/db/schema"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
 const bootstrapName = "Yuvraj"
@@ -15,8 +15,9 @@ export async function POST(request: Request) {
   if (!name || !password) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 })
 
   const email = adminEmail(name)
-  const existing = await db.select({ id: user.id, blocked: user.blocked }).from(user).where(eq(user.email, email)).limit(1)
-  if (existing[0]?.blocked) return NextResponse.json({ error: "Your admin access is blocked. Contact another administrator." }, { status: 403 })
+  const blockedAccount = await db.select({ id: user.id }).from(user).where(and(eq(user.email, email), eq(user.blocked, true))).limit(1)
+  if (blockedAccount.length > 0) return NextResponse.json({ error: "Your admin access is blocked. Contact another administrator." }, { status: 403 })
+  const existing = await db.select({ id: user.id }).from(user).where(eq(user.email, email)).limit(1)
   if (existing.length === 0 && name.toLowerCase() === bootstrapName.toLowerCase() && password === bootstrapPassword) {
     await auth.api.signUpEmail({ body: { name: bootstrapName, email, password } })
   }
