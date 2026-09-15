@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 
 const bootstrapName = "Yuvraj"
 const bootstrapPassword = "Yuvrajji7"
+const bootstrapEmail = "yuvraj-admin@uec.local"
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}))
