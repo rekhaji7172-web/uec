@@ -22,5 +22,18 @@ export async function POST(request: Request) {
     await auth.api.signUpEmail({ body: { name: bootstrapName, email, password } })
   }
 
-  return auth.handler(new Request(new URL("/api/auth/sign-in/email", request.url), { method: "POST", headers: { ...Object.fromEntries(request.headers.entries()), "content-type": "application/json" }, body: JSON.stringify({ email, password }) }))
+  const requestOrigin = request.headers.get("origin") || new URL(request.url).origin
+  const signInUrl = new URL("/api/auth/sign-in/email", requestOrigin)
+  const authHeaders = new Headers(request.headers)
+  authHeaders.set("content-type", "application/json")
+  authHeaders.set("origin", requestOrigin)
+  authHeaders.set("host", signInUrl.host)
+
+  return auth.handler(
+    new Request(signInUrl, {
+      method: "POST",
+      headers: authHeaders,
+      body: JSON.stringify({ email, password }),
+    }),
+  )
 }
