@@ -1,12 +1,10 @@
 import { auth } from "@/lib/auth"
 import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
-import { db } from "@/lib/db"
-import { user } from "@/lib/db/schema"
-import { and, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
 const bootstrapName = "Yuvraj"
 const bootstrapPassword = "Yuvrajji7"
+const bootstrapEmail = "yuvraj-admin@uec.local"
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}))
@@ -14,26 +12,34 @@ export async function POST(request: Request) {
   const password = String(body.password ?? "")
   if (!name || !password) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 })
 
-  const email = adminEmail(name)
-  const blockedAccount = await db.select({ id: user.id }).from(user).where(and(eq(user.email, email), eq(user.blocked, true))).limit(1)
-  if (blockedAccount.length > 0) return NextResponse.json({ error: "Your admin access is blocked. Contact another administrator." }, { status: 403 })
-  const existing = await db.select({ id: user.id }).from(user).where(eq(user.email, email)).limit(1)
-  if (existing.length === 0 && name.toLowerCase() === bootstrapName.toLowerCase() && password === bootstrapPassword) {
-    await auth.api.signUpEmail({ body: { name: bootstrapName, email, password } })
-  }
-
-  const requestOrigin = request.headers.get("origin") || new URL(request.url).origin
-  const signInUrl = new URL("/api/auth/sign-in/email", requestOrigin)
+  const origin = request.headers.get("origin") || new URL(request.url).origin
   const authHeaders = new Headers(request.headers)
   authHeaders.set("content-type", "application/json")
-  authHeaders.set("origin", requestOrigin)
-  authHeaders.set("host", signInUrl.host)
 
-  return auth.handler(
-    new Request(signInUrl, {
-      method: "POST",
-      headers: authHeaders,
-      body: JSON.stringify({ email, password }),
-    }),
-  )
+  async function forward(path: string, body: Record<string, string>) {
+    return auth.handler(
+      new Request(new URL(path, origin), {
+        method: "POST",
+        headers: authHeaders,
+        body: JSON.stringify(body),
+      }),
+    )
+  }
+
+  // Provision the requested bootstrap admin on first use, then use the normal
+  // Better Auth session flow so the cookie works across devices and reloads.
+  if (name === bootstrapName && password === bootstrapPassword) {
+    const bootstrapResponse = await forward("/api/auth/sign-up/email", {
+      name: bootstrapName,
+      email: bootstrapEmail,
+      password: bootstrapPassword,
+    })
+    if (bootstrapResponse.ok) return bootstrapResponse
+    return forward("/api/auth/sign-in/email", { email: bootstrapEmail, password })
+  }
+
+  return forward("/api/auth/sign-in/email", {
+    email: adminEmail(name),
+    password,
+  })
 }
