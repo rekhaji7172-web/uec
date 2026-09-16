@@ -1,6 +1,6 @@
 export function adminEmail(name: string) {
   const normalized = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
-  return `${normalized || "admin"}@uec.local`
+  return normalized === "yuvraj" ? "yuvraj-admin@uec.local" : `${normalized || "admin"}@uec.local`
 }
 
 export function cleanAdminName(name: string) {

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+import "./console.css"
 
 const siteUrl =
   process.env.BETTER_AUTH_URL ||
