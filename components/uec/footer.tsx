@@ -12,7 +12,7 @@ export function Footer() {
             height={46}
             style={{ height: 26, width: "auto" }}
           />
-          <span className="footer-brand-text">Unstable SMP Editing Community</span>
+          <span className="footer-brand-text">Unstable SMP Community</span>
         </div>
       </div>
     </footer>

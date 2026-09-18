@@ -1,5 +1,5 @@
 /* ==========================================================================
-   UEC — Unstable SMP Editing Competition
+   UEC — Unstable SMP Community
    Single source of truth. Everything on the site (leaderboards, awards,
    editor profiles, competition history, the champions grid) is derived
    from SEASONS. To add Season 04, append one object to SEASONS — nothing

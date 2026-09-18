@@ -11,28 +11,26 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "UEC — Unstable SMP Editing Competition",
+    default: "UEC — Unstable SMP Community",
     template: "%s | UEC",
   },
   description:
-    "The official archive of the Unstable SMP Editing Competition — seasons, leaderboards, winners and editor profiles.",
+    "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
   generator: "v0.app",
   applicationName: "UEC",
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "UEC — Unstable SMP Editing Competition",
-    title: "UEC — Unstable SMP Editing Competition",
+    siteName: "UEC — Unstable SMP Community",
+    title: "UEC — Unstable SMP Community",
     description:
-      "Explore UEC seasons, leaderboards, winners, editor profiles and the latest competition updates.",
-    images: [{ url: "/uec-logo.png", width: 512, height: 512, alt: "UEC logo" }],
+      "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
   },
   twitter: {
-    card: "summary",
-    title: "UEC — Unstable SMP Editing Competition",
+    card: "summary_large_image",
+    title: "UEC — Unstable SMP Community",
     description:
-      "Explore UEC seasons, leaderboards, winners, editor profiles and the latest competition updates.",
-    images: ["/uec-logo.png"],
+      "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
   },
   icons: {
     icon: "/uec-logo.png",
