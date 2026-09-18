@@ -1,7 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { MenuIcon, CloseIcon } from "./icons"
 
 const LINKS = [
@@ -17,6 +18,18 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState("home")
+  const router = useRouter()
+  const logoClicks = useRef(0)
+  const logoTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleLogoClick = (event: React.MouseEvent) => {
+    event.preventDefault()
+    logoClicks.current += 1
+    if (logoTimer.current) clearTimeout(logoTimer.current)
+    logoTimer.current = setTimeout(() => { logoClicks.current = 0 }, 900)
+    if (logoClicks.current === 3) { logoClicks.current = 0; router.push("/admin/sign-in") }
+    else go("home")(event)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -53,7 +66,7 @@ export function Nav() {
   return (
     <header className={`nav${scrolled ? " scrolled" : ""}`}>
       <div className="wrap nav-inner">
-        <a href="#home" className="brand" onClick={go("home")} aria-label="UEC home">
+        <a href="#home" className="brand" onClick={handleLogoClick} aria-label="UEC home">
           <Image
             src="/uec-logo.png"
             alt="UEC logo"
@@ -77,8 +90,6 @@ export function Nav() {
             </a>
           ))}
         </nav>
-
-        <a className="admin-nav-link" href="/admin/sign-in">Admin login</a>
 
         <button
           type="button"
