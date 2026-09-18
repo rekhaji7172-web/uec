@@ -20,6 +20,7 @@ import { Footer } from "./footer"
 import { EditorModal } from "./editor-modal"
 import { Reveal } from "./reveal"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
+import { DeveloperCreditCard } from "./developer-credit-card"
 
 export function UecApp() {
   const [activeSeasonId, setActiveSeasonId] = useState<string>(LATEST_SEASON.id)
@@ -158,6 +159,7 @@ export function UecApp() {
       </main>
 
       <Footer />
+      <DeveloperCreditCard />
 
       <EditorModal editor={editor} open={modalOpen} onClose={closeEditor} />
     </>
