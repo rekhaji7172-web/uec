@@ -23,8 +23,7 @@ export function EditorsGrid({ onOpenEditor }: EditorsGridProps) {
             <div className="editor-card-body">
               <div className="editor-card-name">{editor.name}</div>
               <div className="editor-card-meta">
-                Best #{editor.bestRank} · {editor.history.length} season
-                {editor.history.length === 1 ? "" : "s"}
+                Best #{editor.bestRank} · {editor.bestSeasonLabel}
               </div>
               {isChamp && (
                 <span className="editor-card-badge">

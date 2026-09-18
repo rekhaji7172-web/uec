@@ -121,6 +121,7 @@ export interface Editor {
   history: HistoryEntry[]
   wins: number
   bestRank: number
+  bestSeasonLabel: string
   awards: EditorAward[]
 }
 
@@ -135,11 +136,22 @@ export function slugify(name: string): string {
    exact name string used in a season's finalist list — names are never
    merged across seasons unless they match exactly, so we never guess at
    collab/alias identities that weren't given to us. */
+/* Known alias/collab families. The same competitor entered different seasons
+   under slightly different handles (e.g. "Channeling", "Channeling X 1to7",
+   "Channeling / 1to7ae"), so these are folded into one canonical profile
+   instead of showing up as duplicate cards. */
+const EDITOR_ALIASES: { match: RegExp; canonical: string }[] = [
+  { match: /channeling/i, canonical: "Channeling" },
+  { match: /jettstream/i, canonical: "Jettstream4ever" },
+  { match: /wyatt/i, canonical: "WyattMC" },
+]
+
 function canonicalEditorName(name: string): string {
-  // Keep the supplied finalist names distinct. Similar-looking aliases can be
-  // different competitors, so merging them would duplicate the wrong season
-  // history inside an editor profile.
-  return name.trim()
+  const trimmed = name.trim()
+  for (const alias of EDITOR_ALIASES) {
+    if (alias.match.test(trimmed)) return alias.canonical
+  }
+  return trimmed
 }
 
 function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
@@ -157,6 +169,7 @@ function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
             history: [],
             wins: 0,
             bestRank: f.rank,
+            bestSeasonLabel: season.label,
             awards: [],
           })
         }
@@ -188,6 +201,10 @@ function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
       const sb = seasons.find((s) => s.id === b.seasonId)!.number
       return sa - sb
     })
+    // Best finish + the season it was earned in (ties resolve to the earliest season).
+    const best = editor.history.reduce((a, b) => (b.rank < a.rank ? b : a))
+    editor.bestRank = best.rank
+    editor.bestSeasonLabel = best.seasonLabel
   })
 
   return index
