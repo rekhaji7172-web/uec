@@ -33,8 +33,9 @@ export const metadata: Metadata = {
       "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
   },
   icons: {
-    icon: "/uec-logo.png",
-    apple: "/uec-logo.png",
+    icon: "/uec-logo-animated.gif",
+    apple: "/uec-logo-animated.gif",
+    shortcut: "/uec-logo-animated.gif",
   },
 }
 
