@@ -48,115 +48,139 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "64px 72px",
+          alignItems: "center",
+          gap: 56,
+          padding: "0 80px",
           background:
-            "radial-gradient(1100px 620px at 12% -15%, #4a0f38 0%, transparent 58%), radial-gradient(900px 640px at 108% 118%, #2a0740 0%, transparent 55%), linear-gradient(140deg, #08040d 0%, #140419 55%, #1d0722 100%)",
+            "radial-gradient(1200px 680px at 8% -20%, #55123f 0%, transparent 60%), radial-gradient(1000px 720px at 112% 120%, #300a49 0%, transparent 58%), linear-gradient(140deg, #07030c 0%, #130418 55%, #1c0621 100%)",
           fontFamily: "Space Grotesk",
           position: "relative",
         }}
       >
-        {/* soft grid glow overlay */}
+        {/* subtle diagonal sheen */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             display: "flex",
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(255,64,160,0.08) 50%, transparent 100%)",
+            background: "linear-gradient(115deg, transparent 40%, rgba(255,64,160,0.10) 62%, transparent 78%)",
           }}
         />
 
-        {/* top row: real logo + community tag */}
-        <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
-          {logo ? (
-            <img
-              src={logo || "/placeholder.svg"}
-              width={112}
-              height={112}
-              style={{
-                borderRadius: 26,
-                boxShadow: "0 0 64px rgba(255,63,164,0.55)",
-                border: "2px solid rgba(255,143,208,0.45)",
-              }}
-            />
-          ) : null}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              style={{
-                display: "flex",
-                fontSize: 24,
-                letterSpacing: 10,
-                color: "#ff8fd0",
-                textTransform: "uppercase",
-                fontFamily: "Space Grotesk",
-                fontWeight: 600,
-              }}
-            >
-              Unstable SMP Community
-            </span>
-            <span
-              style={{
-                display: "flex",
-                marginTop: 6,
-                fontSize: 20,
-                letterSpacing: 3,
-                color: "#c9a6d8",
-              }}
-            >
-              4K SCENE PACKS  •  TOURNAMENTS  •  GIVEAWAYS
-            </span>
-          </div>
-        </div>
-
-        {/* headline in Bungee display font */}
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 4 }}>
-          <div
-            style={{
-              display: "flex",
-              fontFamily: "Bungee",
-              fontSize: 118,
-              lineHeight: 0.98,
-              letterSpacing: 2,
-              background: "linear-gradient(92deg, #ffffff 0%, #ff8fd0 42%, #b026ff 100%)",
-              backgroundClip: "text",
-              color: "transparent",
-              textShadow: "0 0 44px rgba(176,38,255,0.35)",
-            }}
-          >
-            UNSTABLE
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontFamily: "Bungee",
-              fontSize: 118,
-              lineHeight: 0.98,
-              letterSpacing: 2,
-              background: "linear-gradient(92deg, #ff3fa4 0%, #ff8fd0 55%, #ffffff 100%)",
-              backgroundClip: "text",
-              color: "transparent",
-              textShadow: "0 0 44px rgba(255,63,164,0.4)",
-            }}
-          >
-            SMP COMMUNITY
-          </div>
-        </div>
-
-        {/* description */}
+        {/* left: real UEC lantern logo in a glowing frame */}
         <div
           style={{
             display: "flex",
-            maxWidth: 1000,
-            fontSize: 27,
-            lineHeight: 1.5,
-            color: "#ecdcf2",
-            fontFamily: "Space Grotesk",
+            width: 300,
+            height: 300,
+            flexShrink: 0,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 40,
+            background: "rgba(255,63,164,0.06)",
+            border: "2px solid rgba(255,143,208,0.35)",
+            boxShadow: "0 0 90px rgba(176,38,255,0.45), inset 0 0 40px rgba(255,63,164,0.15)",
           }}
         >
-          Meet your favorite editors, share your edits, collaborate with others, and get access to
-          high-quality 4K scene packs — plus tournaments, giveaways, and the whole Unstable SMP crew.
+          {logo ? (
+            <img
+              src={logo || "/placeholder.svg"}
+              width={252}
+              height={252}
+              style={{ borderRadius: 28 }}
+            />
+          ) : null}
+        </div>
+
+        {/* right: text column */}
+        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+          {/* eyebrow pill */}
+          <div
+            style={{
+              display: "flex",
+              alignSelf: "flex-start",
+              alignItems: "center",
+              padding: "10px 22px",
+              borderRadius: 999,
+              background: "rgba(255,63,164,0.12)",
+              border: "1px solid rgba(255,143,208,0.4)",
+              fontSize: 22,
+              letterSpacing: 8,
+              color: "#ffb3e0",
+              textTransform: "uppercase",
+              fontWeight: 600,
+            }}
+          >
+            Unstable SMP Community
+          </div>
+
+          {/* headline — sized to fit the canvas cleanly */}
+          <div style={{ display: "flex", flexDirection: "column", marginTop: 22 }}>
+            <div
+              style={{
+                display: "flex",
+                fontFamily: "Bungee",
+                fontSize: 92,
+                lineHeight: 1.02,
+                background: "linear-gradient(92deg, #ffffff 0%, #ff8fd0 46%, #b026ff 100%)",
+                backgroundClip: "text",
+                color: "transparent",
+                textShadow: "0 0 40px rgba(176,38,255,0.35)",
+              }}
+            >
+              UNSTABLE SMP
+            </div>
+            <div
+              style={{
+                display: "flex",
+                fontFamily: "Bungee",
+                fontSize: 92,
+                lineHeight: 1.02,
+                background: "linear-gradient(92deg, #ff3fa4 0%, #ff8fd0 55%, #ffffff 100%)",
+                backgroundClip: "text",
+                color: "transparent",
+                textShadow: "0 0 40px rgba(255,63,164,0.4)",
+              }}
+            >
+              COMMUNITY
+            </div>
+          </div>
+
+          {/* description */}
+          <div
+            style={{
+              display: "flex",
+              maxWidth: 720,
+              marginTop: 24,
+              fontSize: 25,
+              lineHeight: 1.5,
+              color: "#ecdcf2",
+            }}
+          >
+            Meet your favorite editors, share your edits, and grab high-quality 4K scene packs — with
+            tournaments, giveaways, and the whole Unstable SMP crew.
+          </div>
+
+          {/* feature row */}
+          <div style={{ display: "flex", gap: 12, marginTop: 26 }}>
+            {["4K Scene Packs", "Tournaments", "Giveaways"].map((t) => (
+              <div
+                key={t}
+                style={{
+                  display: "flex",
+                  padding: "9px 18px",
+                  borderRadius: 12,
+                  background: "rgba(176,38,255,0.14)",
+                  border: "1px solid rgba(255,143,208,0.3)",
+                  fontSize: 20,
+                  color: "#f3d9ff",
+                  fontWeight: 600,
+                }}
+              >
+                {t}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
