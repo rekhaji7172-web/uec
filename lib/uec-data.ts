@@ -136,12 +136,10 @@ export function slugify(name: string): string {
    merged across seasons unless they match exactly, so we never guess at
    collab/alias identities that weren't given to us. */
 function canonicalEditorName(name: string): string {
-  const key = name.toLowerCase().replace(/[^a-z0-9]/g, "")
-  if (key.startsWith("channeling")) return "Channeling"
-  if (key.startsWith("jettstream")) return "Jettstream"
-  if (key.startsWith("wyatt")) return "WyattMC"
-  if (key.startsWith("creo")) return "Creo"
-  return name
+  // Keep the supplied finalist names distinct. Similar-looking aliases can be
+  // different competitors, so merging them would duplicate the wrong season
+  // history inside an editor profile.
+  return name.trim()
 }
 
 function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
@@ -163,7 +161,7 @@ function buildEditorIndex(seasons: Season[]): Map<string, Editor> {
           })
         }
         const editor = index.get(canonicalName)!
-        editor.history.push({
+        if (!editor.history.some((entry) => entry.seasonId === season.id)) editor.history.push({
           seasonId: season.id,
           seasonLabel: season.label,
           subject: season.subject,
