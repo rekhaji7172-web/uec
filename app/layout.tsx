@@ -25,12 +25,19 @@ export const metadata: Metadata = {
     title: "UEC — Unstable SMP Community",
     description:
       "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
+    images: [
+      {
+        url: "https://image2url.com/r2/default/gifs/1789754318106-8e5ecd12-9e44-402e-90df-4e5f4b368859.gif",
+        alt: "UEC — Unstable SMP Community",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "UEC — Unstable SMP Community",
     description:
       "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
+    images: ["https://image2url.com/r2/default/gifs/1789754318106-8e5ecd12-9e44-402e-90df-4e5f4b368859.gif"],
   },
   icons: {
     icon: "/uec-logo-animated.gif",
