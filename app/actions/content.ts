@@ -7,6 +7,7 @@ import { and, asc, eq } from "drizzle-orm"
 import { headers } from "next/headers"
 import { revalidatePath } from "next/cache"
 import { adminEmail, cleanAdminName } from "@/lib/admin-identity"
+import { SEASONS } from "@/lib/uec-data"
 
 export async function listAdmins() {
   await adminId()
@@ -46,6 +47,18 @@ export async function saveContent(input: { id?: string; kind: string; slug: stri
   }
   revalidatePath("/")
   revalidatePath("/admin")
+}
+
+export async function importLegacyContent() {
+  const userId = await adminId()
+  const existing = await db.select({ slug: siteContent.slug }).from(siteContent).where(eq(siteContent.userId, userId))
+  const existingSlugs = new Set(existing.map((item) => item.slug))
+  const records = SEASONS.filter((season) => !existingSlugs.has(`season-${season.id}`)).map((season) => ({ id: crypto.randomUUID(), userId, kind: "season", slug: `season-${season.id}`, title: season.label, body: { description: season.subject ? `Official ${season.subject} editing competition archive.` : "Upcoming UEC competition season.", subject: season.subject ?? "", status: season.status, finalists: JSON.stringify(season.finalists) }, position: season.number, published: true }))
+  if (records.length) await db.insert(siteContent).values(records)
+  revalidatePath("/")
+  revalidatePath("/admin")
+  revalidatePath("/admin/console")
+  return records.length
 }
 
 export async function deleteContent(id: string) {
