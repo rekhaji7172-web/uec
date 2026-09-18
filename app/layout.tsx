@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
     images: [
       {
-        url: "https://image2url.com/r2/default/gifs/1789754318106-8e5ecd12-9e44-402e-90df-4e5f4b368859.gif",
+        url: "https://image2url.com/r2/default/gifs/1789755137579-1acd3357-43b9-4b05-8467-f066e83e41ca.gif",
         alt: "UEC — Unstable SMP Community",
       },
     ],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "UEC — Unstable SMP Community",
     description:
       "UEC is an Unstable SMP fan server made for editors and fans of the community. Meet your favorite editors, share your edits, collaborate with others, and get access to high-quality 4K scene packs. Join editing tournaments, participate in giveaways, and connect with other Unstable SMP fans!",
-    images: ["https://image2url.com/r2/default/gifs/1789754318106-8e5ecd12-9e44-402e-90df-4e5f4b368859.gif"],
+    images: ["https://image2url.com/r2/default/gifs/1789755137579-1acd3357-43b9-4b05-8467-f066e83e41ca.gif"],
   },
   icons: {
     icon: "/uec-logo-animated.gif",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  themeColor: "#060608",
+  themeColor: "#E500E5",
   userScalable: true,
 }
 
