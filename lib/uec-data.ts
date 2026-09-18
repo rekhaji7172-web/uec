@@ -249,6 +249,9 @@ const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
   { match: "wyatt", src: "/editors/wyattmc.webp" },
   { match: "synccraft", src: "/editors/synccraft.webp" },
   { match: "inferno", src: "/editors/inferno.webp" },
+  { match: "voidishere", src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/voidishere-wuIyk3AaJ2mc1Sxq6Fp7hPns6TMTnE.png" },
+  { match: "tw cuberz", src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/twcuberz.webp-KxyljrxMz4QGqlePeqtsaY29HqFPT0.png" },
+  { match: "max yt", src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/maxyt-naA8ewuJidI3x6fJun1ZexDwi9Xwlr.jpg" },
   { match: "creo", src: "/editors/creo.webp" },
   { match: "paceglint", src: "/editors/paceglint.webp" },
 ]
