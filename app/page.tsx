@@ -1,10 +1,12 @@
-import { getPublicTournaments } from "@/app/actions/uec-management"
-import { CurrentTournamentBanner, getCurrentTournament } from "@/components/current-tournament-banner"
+import { getPublicAnnouncements, getPublicTournaments } from "@/app/actions/uec-management"
 import { UecApp } from "@/components/uec/uec-app"
 
 export const dynamic = "force-dynamic"
 
 export default async function Page() {
-  const tournaments = await getPublicTournaments()
-  return <><UecApp /><CurrentTournamentBanner tournament={getCurrentTournament(tournaments)} /></>
+  const [tournaments, announcements] = await Promise.all([
+    getPublicTournaments(),
+    getPublicAnnouncements(),
+  ])
+  return <UecApp tournaments={tournaments} announcements={announcements} />
 }
