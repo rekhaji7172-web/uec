@@ -21,8 +21,19 @@ import { EditorModal } from "./editor-modal"
 import { Reveal } from "./reveal"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
 import { DeveloperCreditCard } from "./developer-credit-card"
+import { NewsroomSection } from "./newsroom-section"
+import type { uecAnnouncement, uecTournament } from "@/lib/db/schema"
 
-export function UecApp() {
+type Tournament = typeof uecTournament.$inferSelect
+type Announcement = typeof uecAnnouncement.$inferSelect
+
+export function UecApp({
+  tournaments = [],
+  announcements = [],
+}: {
+  tournaments?: Tournament[]
+  announcements?: Announcement[]
+}) {
   const [activeSeasonId, setActiveSeasonId] = useState<string>(LATEST_SEASON.id)
   const [editor, setEditor] = useState<Editor | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
@@ -157,6 +168,8 @@ export function UecApp() {
           </div>
         </section>
       </main>
+
+      <NewsroomSection tournaments={tournaments} announcements={announcements} />
 
       <Footer />
       <DeveloperCreditCard />
