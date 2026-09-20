@@ -67,7 +67,7 @@ export const SEASONS: Season[] = [
       { rank: 7, name: "Paceglint", edit: "https://www.youtube.com/shorts/Oosy0-119EE" },
       { rank: 8, name: "Pugly", edit: "https://youtube.com/shorts/VJ9Anu1iZUA" },
       { rank: 9, name: "Wyattmc", edit: "https://youtube.com/shorts/16Dh1qOM5W8" },
-      { rank: 10, name: "Inferno", edit: "https://www.youtube.com/shorts/2lBQ2ppLmR8" },
+      { rank: 10, name: "Inferno", edit: "https://youtube.com/shorts/qGuMAnkabhk" },
     ],
   },
   {
