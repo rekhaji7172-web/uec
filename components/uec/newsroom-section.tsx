@@ -25,11 +25,27 @@ export function NewsroomSection({
   tournaments: Tournament[]
   announcements: Announcement[]
 }) {
-  const current = tournaments.find((item) => item.status !== "COMPLETED") ?? tournaments[0] ?? null
-  const posts = announcements.slice(0, 6)
-  const tournamentById = new Map(tournaments.map((item) => [item.id, item]))
-
-  if (!current && posts.length === 0) return null
+  const fallbackTournament = {
+    id: "uec-4-preview",
+    number: 4,
+    name: "ParrotX2 Tournament",
+    slug: "parrotx2-tournament",
+    status: "OPEN",
+    description: "The fourth UEC editing tournament is now live.",
+    deadlineAt: new Date("2026-09-30T23:59:00"),
+  } as unknown as Tournament
+  const fallbackAnnouncement = {
+    id: "uec-4-launch-preview",
+    tournamentId: fallbackTournament.id,
+    title: "The Launch of the fourth tournament of UEC",
+    shortDescription: "UEC Editing Tournament 4. Find the best Unstable Editor.",
+    content: "UEC Editing Tournament 4 is here! This time, we're challenging the community.",
+    publishAt: new Date("2026-09-20T12:00:00"),
+    externalUrl: null,
+  } as unknown as Announcement
+  const current = tournaments.find((item) => item.status !== "COMPLETED") ?? tournaments[0] ?? fallbackTournament
+  const posts = announcements.length > 0 ? announcements.slice(0, 6) : [fallbackAnnouncement]
+  const tournamentById = new Map([...tournaments, fallbackTournament].map((item) => [item.id, item]))
 
   return (
     <section className="section-pad section-line newsroom-section" id="newsroom">
