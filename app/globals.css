@@ -2410,6 +2410,11 @@ body::after { background: radial-gradient(ellipse at 20% 10%, rgba(255, 0, 174, 
 @media (max-width: 900px) { .newsroom-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .newsroom-feature { flex-direction: column; align-items: stretch; padding: 24px; } .newsroom-feature-side { min-width: 0; } .newsroom-grid { grid-template-columns: 1fr; } }
 .archive-page { min-height: 100vh; padding: 120px 24px 80px; background: radial-gradient(circle at 80% 0%, rgba(229,0,229,.16), transparent 34%), #160b1c; color: #fff; }
+.back-button { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; padding: 10px 15px 10px 11px; border: 1px solid rgba(244,181,255,.28); border-radius: 999px; color: #e7cde9; background: rgba(255,255,255,.055); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; box-shadow: inset 0 1px rgba(255,255,255,.08), 0 8px 24px rgba(229,0,229,.08); transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease; }
+.back-button span:first-child { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: #16091d; background: #f4b5ff; font-size: 1.05rem; line-height: 1; }
+.back-button:hover { transform: translateX(-4px); border-color: #f4b5ff; color: #fff; background: rgba(229,0,229,.16); }
+.back-button:focus-visible { outline: 2px solid #f4b5ff; outline-offset: 4px; }
+
 .archive-shell, .tournament-detail, .profile-detail { width: min(1120px, 100%); margin: 0 auto; }
 .archive-page h1 { font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -.07em; margin: 12px 0 18px; }
 .archive-intro { max-width: 680px; color: #cbb9d3; font-size: 1.2rem; line-height: 1.6; }
