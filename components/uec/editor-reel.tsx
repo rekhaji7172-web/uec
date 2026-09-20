@@ -32,13 +32,14 @@ export function EditorReel() {
     }
   }, [active])
   const items = useMemo(() => {
-    const season = SEASONS.find((entry) => entry.id === "s3")
-    return (season?.finalists ?? []).filter((entry) => entry.edit).map((entry) => ({
-      ...entry,
-      season: season?.label ?? "Season 03",
-      subject: season?.subject ?? "Edit",
-      editorName: entry.name,
-    }))
+    return SEASONS
+      .filter((season) => season.status === "complete")
+      .flatMap((season) => season.finalists.filter((entry) => entry.edit).map((entry) => ({
+        ...entry,
+        season: season.label,
+        subject: season.subject ?? "Edit",
+        editorName: entry.name,
+      })))
   }, [])
 
   return (

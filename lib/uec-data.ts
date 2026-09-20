@@ -271,6 +271,8 @@ const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
   { match: "max yt", src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/maxyt-naA8ewuJidI3x6fJun1ZexDwi9Xwlr.jpg" },
   { match: "creo", src: "/editors/creo.webp" },
   { match: "paceglint", src: "/editors/paceglint.webp" },
+  { match: "pugly", src: "https://i.ytimg.com/vi/VJ9Anu1iZUA/hqdefault.jpg" },
+  { match: "crisspy", src: "https://i.ytimg.com/vi/Zc83AO15yJo/hqdefault.jpg" },
 ]
 
 export function editorImage(name: string): string | null {
