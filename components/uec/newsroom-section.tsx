@@ -93,7 +93,7 @@ export function NewsroomSection({
             {posts.map((post, index) => {
               const linked = post.tournamentId ? tournamentById.get(post.tournamentId) : null
               const date = formatDate(post.publishAt ?? post.createdAt)
-              const href = post.externalUrl || (linked ? `/tournaments/${linked.slug}` : null)
+              const href = post.externalUrl || (linked ? `/tournaments/${linked.slug}` : "/announcements")
               const external = Boolean(post.externalUrl)
               return (
                 <Reveal key={post.id} delay={90 + index * 60}>
