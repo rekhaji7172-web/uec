@@ -15,11 +15,17 @@ export default async function TournamentPage({ params }: { params: Promise<{ slu
     slug: "parrotx2-tournament",
     status: "OPEN",
     description: "The fourth UEC editing tournament is now live.",
-    startAt: null,
-    deadlineAt: new Date("2026-09-30T23:59:00"),
-    rules: ["Create an original edit featuring the tournament subject.", "Submit your edit before the deadline."],
+    startAt: new Date("2026-09-19T11:59:00"),
+    deadlineAt: new Date("2026-09-29T23:59:00"),
+    rules: [
+      "There is a strict limit of two submissions per person.",
+      "All entries must feature ParrotX2 exclusively.",
+      "Keep in mind that skull edits and templates are strictly prohibited.",
+      "Plagiarism or using stolen work will result in immediate disqualification.",
+    ],
   }
   const results = data?.results ?? []
   const announcements = data?.announcements ?? [{ title: "The Launch of the fourth tournament of UEC", content: "UEC Editing Tournament 4 is here! This time, we're challenging the community." }]
-  return <main className="archive-page"><article className="tournament-detail"><BackButton /><p className="eyebrow">UEC #{tournament.number} · {tournament.status.replaceAll("_", " ")}</p><h1>{tournament.name}</h1><p className="archive-intro">{tournament.description || "Official UEC tournament archive."}</p><div className="tournament-meta">{tournament.startAt && <div><span>START</span><strong>{tournament.startAt.toLocaleString()}</strong></div>}{tournament.deadlineAt && <div><span>DEADLINE</span><strong>{tournament.deadlineAt.toLocaleString()}</strong></div>}<div><span>STATUS</span><strong>{tournament.status.replaceAll("_", " ")}</strong></div></div>{announcements[0] && <section className="announcement-card"><span>OFFICIAL ANNOUNCEMENT</span><h2>{announcements[0].title}</h2><p>{announcements[0].content}</p></section>}<section className="rules-panel"><p className="eyebrow">RULES</p>{tournament.rules.length ? <ol>{tournament.rules.map((rule, index) => <li key={`${rule}-${index}`}>{rule}</li>)}</ol> : <p>Rules will be published by the UEC team.</p>}</section>{results.length > 0 && <section className="results-panel"><p className="eyebrow">FINAL RESULTS</p><div className="results-grid">{results.map((result) => <div className={`result-card result-${result.position}`} key={result.id}><span>#{result.position}</span><h2>{result.editorName}</h2>{result.prize && <p>{result.prize}</p>}{result.judgeNote && <p>{result.judgeNote}</p>}{result.editUrl && <a href={result.editUrl} target="_blank" rel="noreferrer">Watch edit ↗</a>}</div>)}</div></section>}</article></main>
+  const formatDate = (value: Date) => value.toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "numeric" })
+  return <main className="archive-page tournament-page"><article className="tournament-detail"><BackButton /><div className="tournament-heading"><p className="eyebrow">UEC #{tournament.number} · {tournament.status.replaceAll("_", " ")}</p><h1>{tournament.name}</h1></div><div className="tournament-meta">{tournament.startAt && <div><span>START</span><strong>{formatDate(tournament.startAt)}, 11:59:00 AM</strong></div>}{tournament.deadlineAt && <div><span>DEADLINE</span><strong>{formatDate(tournament.deadlineAt)}, 11:59:00 PM</strong></div>}<div><span>STATUS</span><strong>{tournament.status.replaceAll("_", " ")}</strong></div></div>{announcements[0] && <section className="announcement-card"><span>OFFICIAL ANNOUNCEMENT</span><h2>{announcements[0].title}</h2><p>{announcements[0].content}</p></section>}<section className="rules-panel"><p className="eyebrow">RULES</p>{tournament.rules.length ? <ol>{tournament.rules.map((rule, index) => <li key={`${rule}-${index}`}>{rule}</li>)}</ol> : <p>Rules will be published by the UEC team.</p>}</section>{results.length > 0 && <section className="results-panel"><p className="eyebrow">FINAL RESULTS</p><div className="results-grid">{results.map((result) => <div className={`result-card result-${result.position}`} key={result.id}><span>#{result.position}</span><h2>{result.editorName}</h2>{result.prize && <p>{result.prize}</p>}{result.judgeNote && <p>{result.judgeNote}</p>}{result.editUrl && <a href={result.editUrl} target="_blank" rel="noreferrer">Watch edit ↗</a>}</div>)}</div></section>}</article></main>
 }
