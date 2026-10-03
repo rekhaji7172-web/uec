@@ -53,6 +53,47 @@ export async function saveResults(tournamentId: string, results: Array<{ positio
 
 export async function getPublicTournaments() { return db.select().from(uecTournament).where(eq(uecTournament.published, true)).orderBy(desc(uecTournament.number)) }
 export async function getPublicTournament(slug: string) { const rows = await db.select().from(uecTournament).where(and(eq(uecTournament.slug, slug), eq(uecTournament.published, true))); if (!rows[0]) return null; const results = await db.select().from(uecResult).where(eq(uecResult.tournamentId, rows[0].id)).orderBy(asc(uecResult.position)); const announcements = await db.select().from(uecAnnouncement).where(and(eq(uecAnnouncement.tournamentId, rows[0].id), eq(uecAnnouncement.status, "PUBLISHED"))).orderBy(desc(uecAnnouncement.publishAt)); return { tournament: rows[0], results, announcements } }
-export async function getPublicEditors() { return db.select().from(uecEditor).where(eq(uecEditor.archived, false)).orderBy(asc(uecEditor.name)) }
-export async function getPublicEditor(username: string) { const rows = await db.select().from(uecEditor).where(and(eq(uecEditor.username, username), eq(uecEditor.archived, false))); if (!rows[0]) return null; const results = await db.select().from(uecResult).where(eq(uecResult.editorId, rows[0].id)).orderBy(asc(uecResult.position)); return { editor: rows[0], results } }
+const INFERNO_CARBON_PROFILE = {
+  id: "inferno-x-carbon",
+  name: "Inferno X Carbon",
+  username: "inferno-x-carbon",
+  profileImage: "/editors/inferno-x-carbon.png",
+  shortBio: "A collaborative editing duo combining Inferno and Carbon.",
+  fullBio: "Inferno X Carbon is a special collaboration profile for the Season 04 ParrotX2 champions. Two editors, one shared vision, and an edit built together.",
+  youtubeUrl: null,
+  shortsUrl: "https://youtube.com/shorts/7qcm_bm3nks",
+  discordUrl: null,
+  featuredAt: null,
+  archived: false,
+  createdAt: new Date("2026-01-01"),
+  updatedAt: new Date("2026-01-01"),
+} as const
+
+const INFERNO_CARBON_RESULT = {
+  id: "inferno-x-carbon-season-04",
+  tournamentId: "season-04",
+  position: 1,
+  editorId: INFERNO_CARBON_PROFILE.id,
+  editorName: INFERNO_CARBON_PROFILE.name,
+  editUrl: INFERNO_CARBON_PROFILE.shortsUrl,
+  profileImage: INFERNO_CARBON_PROFILE.profileImage,
+  prize: "1 Month Discord Nitro",
+  specialAward: "Season 04 Winner",
+  judgeNote: null,
+  highlightText: "A winning collaboration from Inferno and Carbon.",
+  createdAt: new Date("2026-01-01"),
+  updatedAt: new Date("2026-01-01"),
+} as const
+
+export async function getPublicEditors() {
+  const editors = await db.select().from(uecEditor).where(eq(uecEditor.archived, false)).orderBy(asc(uecEditor.name))
+  return [INFERNO_CARBON_PROFILE, ...editors.filter((editor) => editor.username !== INFERNO_CARBON_PROFILE.username)]
+}
+export async function getPublicEditor(username: string) {
+  if (username === INFERNO_CARBON_PROFILE.username) return { editor: INFERNO_CARBON_PROFILE, results: [INFERNO_CARBON_RESULT] }
+  const rows = await db.select().from(uecEditor).where(and(eq(uecEditor.username, username), eq(uecEditor.archived, false)))
+  if (!rows[0]) return null
+  const results = await db.select().from(uecResult).where(eq(uecResult.editorId, rows[0].id)).orderBy(asc(uecResult.position))
+  return { editor: rows[0], results }
+}
 export async function getPublicAnnouncements() { return db.select().from(uecAnnouncement).where(eq(uecAnnouncement.status, "PUBLISHED")).orderBy(desc(uecAnnouncement.publishAt)) }
