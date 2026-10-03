@@ -283,9 +283,11 @@ const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
   { match: "creo", src: "/editors/creo.webp" },
   { match: "paceglint", src: "/editors/paceglint.webp" },
   { match: "pugly", src: "https://i.ytimg.com/vi/VJ9Anu1iZUA/hqdefault.jpg" },
-  { match: "crisspy", src: "https://i.ytimg.com/vi/Zc83AO15yJo/hqdefault.jpg" },
+  { match: "crisspy", src: "/editors/crisspy.webp" },
   { match: "arpan", src: "/editors/arpan.webp" },
   { match: "density", src: "/editors/density.webp" },
+  { match: "aether", src: "/editors/aether.webp" },
+  { match: "zypex", src: "/editors/zypex.webp" },
 ]
 
 export function editorImage(name: string): string | null {
