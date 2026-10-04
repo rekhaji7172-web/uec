@@ -34,17 +34,8 @@ export function NewsroomSection({
     description: "The fourth UEC editing tournament is now live.",
     deadlineAt: new Date("2026-09-30T23:59:00"),
   } as unknown as Tournament
-  const fallbackAnnouncement = {
-    id: "uec-4-launch-preview",
-    tournamentId: fallbackTournament.id,
-    title: "The Launch of the fourth tournament of UEC",
-    shortDescription: "UEC Editing Tournament 4. Find the best Unstable Editor.",
-    content: "UEC Editing Tournament 4 is here! This time, we're challenging the community.",
-    publishAt: new Date("2026-09-20T12:00:00"),
-    externalUrl: null,
-  } as unknown as Announcement
   const current = tournaments.find((item) => item.status !== "COMPLETED") ?? tournaments[0] ?? fallbackTournament
-  const posts = announcements.length > 0 ? announcements.slice(0, 6) : [fallbackAnnouncement]
+  const posts = announcements.slice(0, 6)
   const tournamentById = new Map([...tournaments, fallbackTournament].map((item) => [item.id, item]))
 
   return (

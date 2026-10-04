@@ -15,13 +15,11 @@ import { EditorsGrid } from "./editors-grid"
 import { EditorReelSection } from "./editor-reel"
 import { DiscordCommunity } from "./discord-community"
 import { Awards } from "./awards"
-import { Upcoming } from "./upcoming"
 import { Footer } from "./footer"
 import { EditorModal } from "./editor-modal"
 import { Reveal } from "./reveal"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
 import { DeveloperCreditCard } from "./developer-credit-card"
-import { NewsroomSection } from "./newsroom-section"
 import type { uecAnnouncement, uecTournament } from "@/lib/db/schema"
 
 type Tournament = typeof uecTournament.$inferSelect
@@ -153,23 +151,7 @@ export function UecApp({
           </div>
         </section>
 
-        {/* Upcoming */}
-        <section className="section-pad section-line" id="upcoming">
-          <div className="wrap">
-            <Reveal className="section-head">
-              <div>
-                <span className="eyebrow">What&apos;s Next</span>
-                <h2 className="section-heading">The next season</h2>
-              </div>
-            </Reveal>
-            <Reveal delay={60}>
-              <Upcoming />
-            </Reveal>
-          </div>
-        </section>
       </main>
-
-      <NewsroomSection tournaments={tournaments} announcements={announcements} />
 
       <Footer />
       <DeveloperCreditCard />
