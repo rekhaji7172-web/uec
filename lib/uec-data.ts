@@ -289,6 +289,7 @@ const EDITOR_IMAGE_RULES: { match: string; src: string }[] = [
   { match: "density", src: "/editors/density.webp" },
   { match: "aether", src: "/editors/aether.webp" },
   { match: "zypex", src: "/editors/zypex.webp" },
+  { match: "spooky", src: "/editors/spooky.png" },
 ]
 
 export function editorImage(name: string): string | null {
