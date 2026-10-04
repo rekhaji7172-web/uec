@@ -224,9 +224,8 @@ button {
 /* Scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
-  will-change: opacity, transform;
+  transform: translateY(12px);
+  transition: opacity 0.42s var(--ease-out), transform 0.42s var(--ease-out);
 }
 
 .reveal.is-visible {
@@ -245,8 +244,7 @@ button {
   background:
     radial-gradient(820px 520px at 84% -8%, var(--accent-glow-soft), transparent 60%),
     radial-gradient(620px 460px at 6% 12%, var(--accent-glow-faint), transparent 65%);
-  animation: uec-drift 24s ease-in-out infinite;
-  will-change: transform;
+  /* Keep the ambient wash static so scrolling stays responsive. */
 }
 
 .bg-grid {
@@ -271,8 +269,8 @@ button {
   top: 0;
   z-index: 50;
   background: rgba(6, 6, 8, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
@@ -558,7 +556,7 @@ button {
     linear-gradient(180deg, var(--bg-raised-2), var(--bg-raised));
   padding: 32px;
   overflow: hidden;
-  animation: uec-soft-pulse 5s ease-in-out infinite;
+  box-shadow: 0 0 0 1px var(--accent-dim), 0 0 28px -8px var(--accent-glow-soft);
 }
 
 .champ-card::before {
@@ -896,7 +894,7 @@ button {
   margin-bottom: 16px;
   cursor: pointer;
   overflow: hidden;
-  animation: uec-soft-pulse 5s ease-in-out infinite;
+  box-shadow: 0 0 0 1px var(--accent-dim), 0 0 28px -8px var(--accent-glow-soft);
   transition: border-color 0.24s var(--ease-out), transform 0.24s var(--ease-out);
 }
 
@@ -921,7 +919,7 @@ button {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: uec-shimmer 3.6s linear infinite;
+  background-position: 50% 50%;
   filter: drop-shadow(0 0 22px var(--accent-glow));
 }
 
@@ -1329,7 +1327,7 @@ button {
   background: var(--accent-glow-faint);
   color: var(--accent);
   margin-bottom: 22px;
-  animation: uec-soft-pulse 5s ease-in-out infinite;
+  box-shadow: 0 0 0 1px var(--accent-dim), 0 0 28px -8px var(--accent-glow-soft);
 }
 
 .upcoming-title {
@@ -1449,7 +1447,7 @@ button {
   width: 100%;
   background: linear-gradient(90deg, var(--accent), #ffb3ff, var(--accent));
   background-size: 200% auto;
-  animation: uec-shimmer 3s linear infinite;
+  background-position: 50% 50%;
   flex-shrink: 0;
 }
 
